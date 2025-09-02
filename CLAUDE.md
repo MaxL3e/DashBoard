@@ -3,72 +3,33 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
-This is a **recruitment dashboard** project featuring a modern, Apple-inspired recruitment data visualization interface. The project uses vanilla HTML/CSS/JavaScript with Chart.js for data visualization, designed with Apple's design philosophy.
+This is a recruitment dashboard application built with HTML, JavaScript, and Tailwind CSS. It visualizes recruitment metrics and data through interactive charts and tables.
 
-## Development Setup
+## Key Features
+1. KPI Metrics Display - Shows key recruitment metrics like positions, resumes, interviews, and hires
+2. Interactive Charts - Multiple Chart.js visualizations for trends, department distribution, branch performance, and position popularity
+3. Data Tables - Detailed branch data with sorting capabilities
+4. Time Period Selection - Toggle between total, current month, last month, and quarterly views
+5. Responsive Design - Mobile-friendly layout using Tailwind CSS
 
-### Quick Start Commands
-- **Local Development**: Simply open `index.html` directly in any browser
-- **Python Server**: `python -m http.server 8000`
-- **Node.js Server**: `npx live-server`
+## Data Structure
+- Static data embedded in JavaScript objects (source_data, branch_data, monthly_data, dept_data, position_data)
+- KPI calculations based on monthly and aggregated data
+- Branch and position ranking systems
 
-### Project Structure
-```
-├── index.html                 # Main dashboard page
-├── assets/
-│   ├── css/
-│   │   ├── reset.css         # Browser reset styles
-│   │   ├── jobs.css          # Main application styles
-│   │   └── charts.css        # Chart-specific styles
-│   └── js/
-│       ├── data.js           # Mock recruitment data
-│       ├── charts.js         # Chart configurations and rendering
-│       └── app.js            # Application logic
-├── test.html                 # Test page
-└── README.md                 # Comprehensive project documentation
-```
+## Main Components
+1. Navigation bar with date display and KPI period selector
+2. KPI cards showing recruitment metrics with trend indicators
+3. Trend analysis chart (line chart)
+4. Department distribution chart (doughnut chart)
+5. Branch performance chart (bar chart) with metric selector
+6. Position popularity chart (horizontal bar chart)
+7. Detailed branch data table with ranking
 
-### Technology Stack
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Charts**: Chart.js 4.x (bundled locally in `assets/js/vendor/chart.min.js`)
-- **Design**: Apple-inspired minimal interface, SF Pro Display typography
-- **Themes**: Dark/light mode with local storage persistence
-
-### Key Components
-- **KPI Cards**: Monthly hires (128), completion rate (94%), average cycle time (18 days), cost per hire (1.2万)
-- **Main Charts**: Monthly recruitment trends with 6m/1y period switching
-- **Department Distribution**: Ring chart showing recruitment by department
-- **Channel Effectiveness**: Analysis of 7 recruitment platforms (BOSS直聘, 拉勾网, etc.)
-- **Position Heatmap**: Hot job demand visualization
-- **Quality Radar**: Candidate assessment across 6 dimensions
-- **Job Table**: Latest job listings with filtering/export
-
-### File Responsibilities
-- **index.html**: Main dashboard layout with responsive grid system
-- **assets/css/jobs.css**: Apple-style design system, color variables, responsive breakpoints
-- **assets/css/charts.css**: Chart styling, card layouts, animations
-- **assets/js/data.js**: All mock recruitment data and configurations
-- **assets/js/charts.js**: Chart initialization, Canvas-based rendering, Chart.js configurations
-- **assets/js/app.js**: Theme switching, data loading, interactions, keyboard shortcuts
-
-### Browser Compatibility
-- Modern browsers: Chrome 80+, Safari 13+, Firefox 75+, Edge 80+
-- Mobile: iOS Safari 13+, Android Chrome 80+
-
-### Data Management
-- Mock data is hardcoded in `assets/js/data.js`
-- Charts use Canvas API via Chart.js
-- Theme preferences stored in localStorage
-- No backend requirements - pure static implementation
-
-### Responsive Design Points
-- Desktop (1920px+): 4-column KPI, 2×2 chart grid
-- Laptop (1366px): 2-column KPI, 2×2 charts
-- Tablet (768px): 1-column KPI, vertical charts
-- Mobile (375px): Compact KPI, touch-friendly
-
-### Styling System
-- Fonts: `-apple-system, BlinkMacSystemFont, 'SF Pro Display', system fonts`
-- Colors: Apple Design Language (007AFF, 30D158, FF9F0A, FF453A)
-- Spacing: 4px/8px/16px/24px/32px scale
-- Animations: CSS hardware-accelerated transitions
+## Development Notes
+- All data is currently static/mock data
+- Uses Chart.js v4.4.8 for data visualization
+- Uses Tailwind CSS v3.x for styling
+- Uses Font Awesome v6.7.2 for icons
+- Single HTML file application with embedded JavaScript
+- No external backend or database dependencies

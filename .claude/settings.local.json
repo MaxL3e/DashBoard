@@ -15,7 +15,15 @@
       "Bash(cp -r recruitment-dashboard/* .)",
       "Bash(rm -rf recruitment-dashboard)",
       "Bash(git commit -m \"Move files to root for GitHub Pages\")",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(grep -n \"initJobsTable\\|getStatusText\\|showJobDetails\\|refreshJobsTable\" assets/js/app.js)",
+      "Bash(nodejs -c assets/js/app.js)",
+      "Bash(grep -n \"EventListener\\|querySelector\\|getElementById\" assets/js/app.js)",
+      "WebSearch",
+      "Bash(sed -n '287,325p' D:/vscode/databse/index.html)",
+      "Bash(sed -n '327,372p' D:/vscode/databse/index.html)",
+      "Bash(sed -i 's/分支招聘转化分析/分支排名数据/g' D:/vscode/databse/index.html)",
+      "Bash(sed -n '287,330p' D:/vscode/databse/index.html)"
     ],
     "deny": [],
     "ask": []

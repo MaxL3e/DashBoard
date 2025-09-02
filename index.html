@@ -1,196 +1,642 @@
-<!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>招聘数据中心 | Jobs Dashboard</title>
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMwMDdBRkYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiA3QzE2IDUuOSAxNS4xIDUgMTQgNUgxMEM4LjkgNSA4IDUuOSA4IDdWOUg2Vjc4SDE4VjlIMTZWN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDlIMTZWMTlIOFY5WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=">
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/jobs.css">
-    <link rel="stylesheet" href="assets/css/charts.css">
-    <!-- 直接使用本地 Chart.js 文件，避免网络问题 -->
-    <script src="assets/js/vendor/chart.min.js"></script>
+    <title>招聘数据仪表盘</title>
+
+    <!-- 静态资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <style>
+        #china-map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .province {
+            fill: #C6E5FF;
+            stroke: #fff;
+            stroke-width: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .province:hover {
+            stroke: #333;
+            stroke-width: 2;
+        }
+        
+        .province-low { fill: #C6E5FF; }
+        .province-medium { fill: #4A90E2; }
+        .province-high { fill: #1E40AF; }
+    </style>
+
+    <!-- 内联数据区 -->
     <script>
-        // 验证 Chart.js 加载状态
-        window.addEventListener('load', function() {
-            if (window.Chart) {
-                console.log('✓ Chart.js 加载成功，版本:', Chart.version);
-                window.chartLibraryLoaded = true;
-            } else {
-                console.error('❌ Chart.js 加载失败');
-                window.chartLibraryLoadError = true;
+        const source_data = [
+            { "分支简称": "分支1", "职位数": 267, "新增简历数": 123123, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 332, "简历推荐率": 1.0, "面试转化率": 11.37, "入职转化率": 9.35 },
+            { "分支简称": "分支2", "职位数": 25, "新增简历数": 244, "简历推荐数": 244, "面试中总数": 24, "入职数": 6, "招聘账号数": 2225, "简历推荐率": 100.0, "面试转化率": 9.84, "入职转化率": 25.0 },
+            { "分支简称": "分支3", "职位数": 12, "新增简历数": 46, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 444, "简历推荐率": 65.22, "面试转化率": 16.67, "入职转化率": 20.0 },
+            { "分支简称": "分支4", "职位数": 25, "新增简历数": 278, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 5, "简历推荐率": 57.55, "面试转化率": 43.75, "入职转化率": 22.86 },
+            { "分支简称": "分支5", "职位数": 7, "新增简历数": 4, "简历推荐数": 4, "面试中总数": 4, "入职数": 4, "招聘账号数": 25, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0 },
+            { "分支简称": "分支6", "职位数": 21, "新增简历数": 123123, "简历推荐数": 12311, "面试中总数": 1231, "入职数": 245, "招聘账号数": 5552, "简历推荐率": 10.0, "面试转化率": 10.0, "入职转化率": 19.9 },
+            { "分支简称": "分支7", "职位数": 26, "新增简历数": 25, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 25, "简历推荐率": 4892.0, "面试转化率": 11.37, "入职转化率": 9.35 },
+            { "分支简称": "分支8", "职位数": 9, "新增简历数": 2525, "简历推荐数": 254, "面试中总数": 24, "入职数": 6, "招聘账号数": 25, "简历推荐率": 10.06, "面试转化率": 9.45, "入职转化率": 25.0 },
+            { "分支简称": "分支9", "职位数": 555, "新增简历数": 402, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 252, "简历推荐率": 7.46, "面试转化率": 16.67, "入职转化率": 20.0 },
+            { "分支简称": "分支10", "职位数": 38, "新增简历数": 629, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 7, "简历推荐率": 25.44, "面试转化率": 43.75, "入职转化率": 22.86 }
+        ];
+
+        const branch_data = [
+            { "分支简称": "分支1", "职位数": 267, "新增简历数": 123123, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 332, "简历推荐率": 1.0, "面试转化率": 11.37, "入职转化率": 9.35 },
+            { "分支简称": "分支2", "职位数": 25, "新增简历数": 244, "简历推荐数": 244, "面试中总数": 24, "入职数": 6, "招聘账号数": 2225, "简历推荐率": 100.0, "面试转化率": 9.84, "入职转化率": 25.0 },
+            { "分支简称": "分支3", "职位数": 12, "新增简历数": 46, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 444, "简历推荐率": 65.22, "面试转化率": 16.67, "入职转化率": 20.0 },
+            { "分支简称": "分支4", "职位数": 25, "新增简历数": 278, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 5, "简历推荐率": 57.55, "面试转化率": 43.75, "入职转化率": 22.86 },
+            { "分支简称": "分支5", "职位数": 7, "新增简历数": 4, "简历推荐数": 4, "面试中总数": 4, "入职数": 4, "招聘账号数": 25, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0 },
+            { "分支简称": "分支6", "职位数": 21, "新增简历数": 123123, "简历推荐数": 12311, "面试中总数": 1231, "入职数": 245, "招聘账号数": 5552, "简历推荐率": 10.0, "面试转化率": 10.0, "入职转化率": 19.9 },
+            { "分支简称": "分支7", "职位数": 26, "新增简历数": 25, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 25, "简历推荐率": 4892.0, "面试转化率": 11.37, "入职转化率": 9.35 },
+            { "分支简称": "分支8", "职位数": 9, "新增简历数": 2525, "简历推荐数": 254, "面试中总数": 24, "入职数": 6, "招聘账号数": 25, "简历推荐率": 10.06, "面试转化率": 9.45, "入职转化率": 25.0 },
+            { "分支简称": "分支9", "职位数": 555, "新增简历数": 402, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 252, "简历推荐率": 7.46, "面试转化率": 16.67, "入职转化率": 20.0 },
+            { "分支简称": "分支10", "职位数": 38, "新增简历数": 629, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 7, "简历推荐率": 25.44, "面试转化率": 43.75, "入职转化率": 22.86 },
+            { "分支简称": "分支11", "职位数": 21, "新增简历数": 21, "简历推荐数": 21, "面试中总数": 21, "入职数": 21, "招聘账号数": 21, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0 },
+            { "分支简称": "分支12", "职位数": 33, "新增简历数": 333, "简历推荐数": 33, "面试中总数": 3, "入职数": 3, "招聘账号数": 33, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支13", "职位数": 44, "新增简历数": 444, "简历推荐数": 44, "面试中总数": 4, "入职数": 4, "招聘账号数": 44, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支14", "职位数": 55, "新增简历数": 555, "简历推荐数": 55, "面试中总数": 5, "入职数": 5, "招聘账号数": 55, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支15", "职位数": 66, "新增简历数": 666, "简历推荐数": 66, "面试中总数": 6, "入职数": 6, "招聘账号数": 66, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支16", "职位数": 77, "新增简历数": 777, "简历推荐数": 77, "面试中总数": 7, "入职数": 7, "招聘账号数": 77, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支17", "职位数": 88, "新增简历数": 888, "简历推荐数": 88, "面试中总数": 8, "入职数": 8, "招聘账号数": 88, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支18", "职位数": 99, "新增简历数": 999, "简历推荐数": 99, "面试中总数": 9, "入职数": 9, "招聘账号数": 99, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支19", "职位数": 101, "新增简历数": 1010, "简历推荐数": 101, "面试中总数": 10, "入职数": 10, "招聘账号数": 101, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支20", "职位数": 111, "新增简历数": 1111, "简历推荐数": 111, "面试中总数": 11, "入职数": 11, "招聘账号数": 111, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支21", "职位数": 121, "新增简历数": 1212, "简历推荐数": 121, "面试中总数": 12, "入职数": 12, "招聘账号数": 121, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
+            { "分支简称": "分支22", "职位数": 131, "新增简历数": 1313, "简历推荐数": 131, "面试中总数": 13, "入职数": 13, "招聘账号数": 131, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 }
+        ];
+
+        const monthly_data = [
+            { "month": "2024-09", "新增职位数": 475, "新增简历数": 45324, "简历推荐数": 5366, "面试数": 728, "入职数": 116 },
+            { "month": "2024-10", "新增职位数": 455, "新增简历数": 33369, "简历推荐数": 5942, "面试数": 769, "入职数": 154 },
+            { "month": "2024-11", "新增职位数": 449, "新增简历数": 50688, "简历推荐数": 6181, "面试数": 688, "入职数": 131 },
+            { "month": "2024-12", "新增职位数": 510, "新增简历数": 41293, "简历推荐数": 5785, "面试数": 795, "入职数": 144 },
+            { "month": "2025-01", "新增职位数": 522, "新增简历数": 32863, "简历推荐数": 4502, "面试数": 663, "入职数": 132 },
+            { "month": "2025-02", "新增职位数": 588, "新增简历数": 35665, "简历推荐数": 5212, "面试数": 766, "入职数": 116 },
+            { "month": "2025-03", "新增职位数": 536, "新增简历数": 42187, "简历推荐数": 5890, "面试数": 812, "入职数": 167 },
+            { "month": "2025-04", "新增职位数": 592, "新增简历数": 38456, "简历推荐数": 6345, "面试数": 876, "入职数": 189 },
+            { "month": "2025-05", "新增职位数": 621, "新增简历数": 45678, "简历推荐数": 6890, "面试数": 923, "入职数": 210 },
+            { "month": "2025-06", "新增职位数": 645, "新增简历数": 49876, "简历推荐数": 7234, "面试数": 987, "入职数": 225 },
+            { "month": "2025-07", "新增职位数": 689, "新增简历数": 52134, "简历推荐数": 7654, "面试数": 1034, "入职数": 243 },
+            { "month": "2025-08", "新增职位数": 712, "新增简历数": 55678, "简历推荐数": 8123, "面试数": 1098, "入职数": 265 }
+        ];
+
+        const dept_data = [
+            { "部门": "技术研发", "职位数": 142, "占比": 2.1 },
+            { "部门": "产品运营", "职位数": 1097, "占比": 16.4 },
+            { "部门": "市场营销", "职位数": 167, "占比": 2.5 },
+            { "部门": "人力资源", "职位数": 321, "占比": 4.8 },
+            { "部门": "财务会计", "职位数": 462, "占比": 6.9 },
+            { "部门": "客户服务", "职位数": 2290, "占比": 34.3 },
+            { "部门": "销售业务", "职位数": 1281, "占比": 19.2 },
+            { "部门": "管理岗位", "职位数": 910, "占比": 13.6 }
+        ];
+
+        const position_data = [
+            { "职位": "iOS开发", "需求量": 1189, "热度指数": 17.8 },
+            { "职位": "前端工程师", "需求量": 73, "热度指数": 1.1 },
+            { "职位": "后端工程师", "需求量": 901, "热度指数": 13.5 },
+            { "职位": "产品经理", "需求量": 295, "热度指数": 4.4 },
+            { "职位": "UI设计师", "需求量": 293, "热度指数": 4.4 },
+            { "职位": "数据分析师", "需求量": 620, "热度指数": 9.3 },
+            { "职位": "销售代表", "需求量": 330, "热度指数": 5.0 },
+            { "职位": "人力资源专员", "需求量": 347, "热度指数": 5.2 },
+            { "职位": "客服代表", "需求量": 470, "热度指数": 7.1 },
+            { "职位": "财务专员", "需求量": 817, "热度指数": 12.3 }
+        ];
+
+        const kpi_data = {
+            total: { "新增职位数": 6674, "新增简历数": 512016, "简历推荐数": 65473, "面试数": 9343, "入职数": 1802 },
+            current_month: monthly_data[monthly_data.length - 1],
+            last_month: monthly_data[monthly_data.length - 2],
+            current_quarter: {
+                "新增职位数": monthly_data.slice(-3).reduce((sum, m) => sum + m["新增职位数"], 0),
+                "新增简历数": monthly_data.slice(-3).reduce((sum, m) => sum + m["新增简历数"], 0),
+                "简历推荐数": monthly_data.slice(-3).reduce((sum, m) => sum + m["简历推荐数"], 0),
+                "面试数": monthly_data.slice(-3).reduce((sum, m) => sum + m["面试数"], 0),
+                "入职数": monthly_data.slice(-3).reduce((sum, m) => sum + m["入职数"], 0)
             }
-        });
+        };
     </script>
 </head>
-<body>
-    <!-- 主容器 -->
-    <div class="dashboard-container">
-        
-        <!-- 顶部导航栏 -->
-        <header class="dashboard-header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo-icon">🎯</div>
-                    <h1 class="dashboard-title">招聘数据中心</h1>
-                </div>
-                <div class="date-section">
-                    <div class="current-date" id="currentDate"></div>
-                    <button class="theme-toggle" id="themeToggle">🌓</button>
-                </div>
-            </div>
-        </header>
 
-        <!-- KPI 核心指标区域 -->
-        <section class="kpi-section">
-            <div class="kpi-time-selector">
-                <div class="time-controls">
-                    <button class="time-btn active" data-period="day">当日</button>
-                    <button class="time-btn" data-period="month">当月</button>
-                    <button class="time-btn" data-period="year">本年</button>
-                    <button class="time-btn" data-period="total">总计</button>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 顶部导航 -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-chart-line text-blue-600 text-2xl mr-3"></i>
+                    <h1 class="text-xl font-semibold text-gray-900">招聘数据仪表盘</h1>
                 </div>
-            </div>
-            <div class="kpi-grid">
-                <div class="kpi-card highlight">
-                    <div class="kpi-icon">📋</div>
-                    <div class="kpi-content">
-                        <div class="kpi-number" data-number="85" data-period-day="3" data-period-month="85" data-period-year="956" data-period-total="3840">0</div>
-                        <div class="kpi-label">职位发布</div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <select id="kpi-period"
+                            class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 appearance-none pr-8">
+                            <option value="total">总计</option>
+                            <option value="current_month">本月</option>
+                            <option value="last_month">上月</option>
+                            <option value="current_quarter">本季度</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
                     </div>
-                </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon">📝</div>
-                    <div class="kpi-content">
-                        <div class="kpi-number" data-number="342" data-period-day="12" data-period-month="342" data-period-year="4180" data-period-total="18560">0</div>
-                        <div class="kpi-label">简历新增</div>
-                    </div>
-                </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon">👨‍💼</div>
-                    <div class="kpi-content">
-                        <div class="kpi-number" data-number="8" data-period-day="8" data-period-month="8" data-period-year="12" data-period-total="18">0</div>
-                        <div class="kpi-label">招聘顾问人数</div>
-                    </div>
-                </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon">✅</div>
-                    <div class="kpi-content">
-                        <div class="kpi-number" data-number="28" data-period-day="2" data-period-month="28" data-period-year="312" data-period-total="1280">0</div>
-                        <div class="kpi-label">入职</div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-calendar-alt text-gray-500"></i>
+                        <span class="text-sm text-gray-500" id="current-date"></span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <!-- 主图表区域 -->
-        <section class="main-chart-section">
-            <div class="chart-card main-chart">
-                <div class="chart-header">
-                    <h3 class="chart-title">月度招聘趋势</h3>
-                    <div class="chart-controls">
-                        <button class="control-btn active" data-period="6m">6个月</button>
-                        <button class="control-btn" data-period="1y">1年</button>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- KPI卡片区域 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">新增项目数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="新增项目数">0</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-lg">
+                        <i class="fas fa-plus-circle text-blue-600"></i>
                     </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="trendChart"></canvas>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 12.5%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
                 </div>
             </div>
-        </section>
 
-        <!-- 辅助图表区域 -->
-        <section class="secondary-charts-section">
-            <div class="charts-grid">
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">成功项目数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="成功项目数">0</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-lg">
+                        <i class="fas fa-check-circle text-green-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 8.3%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">新增职位数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="新增职位数">0</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-lg">
+                        <i class="fas fa-briefcase text-purple-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 15.2%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">简历推荐数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="简历推荐数">0</p>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-lg">
+                        <i class="fas fa-user-check text-orange-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-red-600 flex items-center">
+                        <i class="fas fa-arrow-down mr-1"></i> 3.1%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">面试数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="面试数">0</p>
+                    </div>
+                    <div class="bg-indigo-100 p-3 rounded-lg">
+                        <i class="fas fa-comments text-indigo-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 9.7%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">入职数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图表区域 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+            <!-- 需求洞察 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-semibold text-gray-900">招聘需求分布</h2>
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-info-circle mr-1"></i> 按职位数统计
+                    </div>
+                </div>
+                <div class="h-80">
+                    <div id="china-map" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分支数据区域 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+        </div>
+
+        <!-- 分支数据明细 -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-lg font-semibold text-gray-900">分支数据明细</h2>
+                <div class="relative">
+                    <select id="rank-metric"
+                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 appearance-none pr-8">
+                        <option value="职位数">职位数排名</option>
+                        <option value="新增简历数">新增简历数排名</option>
+                        <option value="简历推荐数">简历推荐数排名</option>
+                        <option value="面试中总数">面试数排名</option>
+                        <option value="入职数">入职数排名</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                排名</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                分支</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                职位数</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                新增简历数</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                简历推荐数</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                面试数</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                入职数</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                简历推荐率</th>
+                        </tr>
+                    </thead>
+                    <tbody id="branch-table-body" class="bg-white divide-y divide-gray-200">
+                        <!-- 表格内容将通过JavaScript动态生成 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function () {
+            // 设置当前日期
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('zh-CN');
+
+            // 初始化KPI数据
+            updateKPI('total');
+
+            // 初始化图表
+            // 延迟初始化确保ECharts和地图数据加载完成
+            setTimeout(function() {
+                initDeptChart();
+            }, 100);
+
+            // 初始化表格
+            updateBranchTable('职位数');
+
+            // 事件监听
+            document.getElementById('kpi-period').addEventListener('change', function (e) {
+                updateKPI(e.target.value);
+            });
+
+            document.getElementById('rank-metric').addEventListener('change', function (e) {
+                updateBranchTable(e.target.value);
+            });
+        });
+
+        // 更新KPI数据
+        function updateKPI(period) {
+            const kpiValues = kpi_data[period];
+
+            // 特殊处理新增项目数和成功项目数（模拟数据）
+            const projectData = {
+                total: { '新增项目数': 128, '成功项目数': 96 },
+                current_month: { '新增项目数': 15, '成功项目数': 12 },
+                last_month: { '新增项目数': 13, '成功项目数': 10 },
+                current_quarter: { '新增项目数': 42, '成功项目数': 35 }
+            };
+
+            // 更新所有KPI值
+            document.querySelectorAll('.kpi-value').forEach(el => {
+                const kpiName = el.getAttribute('data-kpi');
+                if (kpiName === '新增项目数' || kpiName === '成功项目数') {
+                    el.textContent = formatNumber(projectData[period][kpiName]);
+                } else {
+                    el.textContent = formatNumber(kpiValues[kpiName]);
+                }
+            });
+        }
+
+        // 初始化趋势图表
+        function initTrendChart(months) {
+            const ctx = document.getElementById('trend-chart').getContext('2d');
+            const data = monthly_data.slice(-months);
+
+            if (window.trendChart) {
+                window.trendChart.destroy();
+            }
+
+            window.trendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => d.month.substring(5)),
+                    datasets: [
+                        {
+                            label: '新增职位数',
+                            data: data.map(d => d.新增职位数),
+                            borderColor: 'rgb(59, 130, 246)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: '简历推荐数',
+                            data: data.map(d => d.简历推荐数),
+                            borderColor: 'rgb(16, 185, 129)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: '入职数',
+                            data: data.map(d => d.入职数),
+                            borderColor: 'rgb(245, 158, 11)',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 初始化中国热力图
+        function initDeptChart() {
+            const chartDom = document.getElementById('china-map');
+            
+            // 确保元素存在且可见
+            if (!chartDom) {
+                console.error('Cannot find china-map element');
+                return;
+            }
+            
+            try {
+                // 初始化ECharts实例
+                const myChart = echarts.init(chartDom);
                 
-                <!-- 部门招聘分布 -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3 class="chart-title">部门招聘分布</h3>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="departmentChart"></canvas>
-                    </div>
-                </div>
+                // 将部门数据映射到中国各省市（示意性映射）
+                const provinceMap = {
+                    '北京': dept_data[1],  // 产品运营
+                    '上海': dept_data[5],  // 客户服务
+                    '广东': dept_data[7],  // 管理岗位
+                    '江苏': dept_data[6],  // 销售业务
+                    '山东': dept_data[4],  // 财务会计
+                    '浙江': dept_data[3],  // 人力资源
+                    '河南': dept_data[0],  // 技术研发
+                    '河北': dept_data[2],  // 市场营销
+                    '湖南': dept_data[1],
+                    '湖北': dept_data[6],
+                    '辽宁': dept_data[7],
+                    '四川': dept_data[4],
+                    '陕西': dept_data[0],
+                    '福建': dept_data[3],
+                    '重庆': dept_data[2],
+                    '天津': dept_data[5],
+                    '山西': dept_data[1],
+                    '安徽': dept_data[7],
+                    '广西': dept_data[4],
+                    '云南': dept_data[0],
+                    '贵州': dept_data[3],
+                    '甘肃': dept_data[2],
+                    '新疆': dept_data[5],
+                    '内蒙古': dept_data[6],
+                    '黑龙江': dept_data[4],
+                    '吉林': dept_data[0],
+                    '宁夏': dept_data[3],
+                    '海南': dept_data[2],
+                    '青海': dept_data[5],
+                    '西藏': dept_data[6],
+                    '台湾': dept_data[4],
+                    '香港': dept_data[0],
+                    '澳门': dept_data[3]
+                };
+                
+                // 构建地图数据
+                const mapData = Object.keys(provinceMap).map(province => ({
+                    name: province,
+                    value: provinceMap[province].职位数
+                }));
+                
+                // ECharts选项
+                const option = {
+                    title: {
+                        text: '招聘需求分布热力图（按职位数）',
+                        left: 'center',
+                        textStyle: {
+                            color: '#333',
+                            fontSize: 16,
+                            fontWeight: 'bold'
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function (params) {
+                            if (params.data && params.data.value) {
+                                return params.name + '<br/>' + params.data.value + ' 职位';
+                            }
+                            return params.name;
+                        }
+                    },
+                    visualMap: {
+                        min: 0,
+                        max: Math.max(...mapData.map(item => item.value)) + 100,
+                        inRange: {
+                            color: ['#C6E5FF', '#4A90E2', '#1E40AF']
+                        },
+                        text: ['高', '低'],
+                        calculable: true
+                    },
+                    series: [
+                        {
+                            name: '职位数',
+                            type: 'map',
+                            map: 'china',
+                            roam: false,
+                            zoom: 1.2,
+                            label: {
+                                show: true,
+                                color: '#333',
+                                fontSize: 10
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    color: '#fff'
+                                },
+                                itemStyle: {
+                                    areaColor: '#4A90E2'
+                                }
+                            },
+                            data: mapData
+                        }
+                    ]
+                };
+                
+                // 渲染图表
+                myChart.setOption(option);
+                
+                // 监听窗口大小变化，自适应图表大小
+                window.addEventListener('resize', function() {
+                    if (myChart) {
+                        myChart.resize();
+                    }
+                });
+                
+                console.log('ECharts initialized successfully');
+            } catch (error) {
+                console.error('Error initializing ECharts:', error);
+                
+                // 如果ECharts初始化失败，显示错误信息
+                chartDom.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">图表加载失败</div>';
+            }
+        }
 
-                <!-- 招聘渠道效果 -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3 class="chart-title">渠道转化效果</h3>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="channelChart"></canvas>
-                    </div>
-                </div>
 
-                <!-- 职位需求热度 -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3 class="chart-title">职位需求热度</h3>
-                    </div>
-                    <div class="chart-container">
-                        <div class="position-heat-map" id="positionHeatMap"></div>
-                    </div>
-                </div>
 
-                <!-- 候选人质量分析 -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3 class="chart-title">候选人质量评估</h3>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="qualityChart"></canvas>
-                    </div>
-                </div>
+        // 更新分支表格
+        function updateBranchTable(metric) {
+            const tbody = document.getElementById('branch-table-body');
+            const sortedData = [...branch_data].sort((a, b) => b[metric] - a[metric]);
 
-            </div>
-        </section>
+            tbody.innerHTML = '';
 
-        <!-- 最新职位列表 -->
-        <section class="data-table-section">
-            <div class="table-card">
-                <div class="table-header">
-                    <h3 class="table-title">最新职位动态</h3>
-                    <div class="table-controls">
-                        <button class="control-btn">刷新</button>
-                        <button class="control-btn">导出</button>
-                    </div>
-                </div>
-                <div class="table-container">
-                    <table class="data-table" id="jobsTable">
-                        <thead>
-                            <tr>
-                                <th>职位名称</th>
-                                <th>部门</th>
-                                <th>发布时间</th>
-                                <th>申请人数</th>
-                                <th>面试进度</th>
-                                <th>状态</th>
-                            </tr>
-                        </thead>
-                        <tbody id="jobsTableBody">
-                            <!-- 表格内容将通过 JavaScript 动态填充 -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+            sortedData.forEach((branch, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
 
-    </div>
+                // 排名样式
+                let rankClass = 'bg-gray-100';
+                if (index === 0) rankClass = 'bg-yellow-100 text-yellow-800';
+                else if (index === 1) rankClass = 'bg-gray-200 text-gray-800';
+                else if (index === 2) rankClass = 'bg-orange-100 text-orange-800';
 
-    <!-- 加载动画 -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">正在加载数据...</div>
-    </div>
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full ${rankClass} text-xs font-medium">
+                            ${index + 1}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${branch.分支简称}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatNumber(branch.职位数)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatNumber(branch.新增简历数)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatNumber(branch.简历推荐数)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatNumber(branch.面试中总数)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatNumber(branch.入职数)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${branch.简历推荐率.toFixed(1)}%</td>
+                `;
 
-    <!-- JavaScript 文件 -->
-    <script src="assets/js/data.js"></script>
-    <script src="assets/js/charts.js"></script>
-    <script src="assets/js/app.js"></script>
+                tbody.appendChild(row);
+            });
+        }
+
+        // 数字格式化
+        function formatNumber(num) {
+            return new Intl.NumberFormat('zh-CN').format(num);
+        }
+    </script>
+
 </body>
+
 </html>
