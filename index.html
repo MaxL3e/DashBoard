@@ -8,27 +8,21 @@
     <!-- 静态资源 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <script src="js/chart.umd.min.js"></script>
-    <style>
-        #branch-rank-chart, #position-rank-chart {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
 
     <!-- 内联数据区 -->
     <script>
         const source_data = [
-            { "分支简称": "分支1", "职位数": 267, "新增简历数": 200, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 332, "简历推荐率": 1.0, "面试转化率": 11.37, "入职转化率": 9.35 },
-            { "分支简称": "分支2", "职位数": 25, "新增简历数": 20, "简历推荐数": 244, "面试中总数": 24, "入职数": 6, "招聘账号数": 2225, "简历推荐率": 100.0, "面试转化率": 9.84, "入职转化率": 25.0 },
-            { "分支简称": "分支3", "职位数": 12, "新增简历数": 10, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 444, "简历推荐率": 65.22, "面试转化率": 16.67, "入职转化率": 20.0 },
-            { "分支简称": "分支4", "职位数": 25, "新增简历数": 20, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 5, "简历推荐率": 57.55, "面试转化率": 43.75, "入职转化率": 22.86 },
-            { "分支简称": "分支5", "职位数": 7, "新增简历数": 5, "简历推荐数": 4, "面试中总数": 4, "入职数": 4, "招聘账号数": 25, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0 },
-            { "分支简称": "分支6", "职位数": 21, "新增简历数": 15, "简历推荐数": 12311, "面试中总数": 1231, "入职数": 245, "招聘账号数": 5552, "简历推荐率": 10.0, "面试转化率": 10.0, "入职转化率": 19.9 },
-            { "分支简称": "分支7", "职位数": 26, "新增简历数": 20, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 25, "简历推荐率": 4892.0, "面试转化率": 11.37, "入职转化率": 9.35 },
-            { "分支简称": "分支8", "职位数": 9, "新增简历数": 7, "简历推荐数": 254, "面试中总数": 24, "入职数": 6, "招聘账号数": 25, "简历推荐率": 10.06, "面试转化率": 9.45, "入职转化率": 25.0 },
-            { "分支简称": "分支9", "职位数": 555, "新增简历数": 400, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 252, "简历推荐率": 7.46, "面试转化率": 16.67, "入职转化率": 20.0 },
-            { "分支简称": "分支10", "职位数": 38, "新增简历数": 30, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 7, "简历推荐率": 25.44, "面试转化率": 43.75, "入职转化率": 22.86 }
+            { "分支简称": "分支1", "职位数": 267, "新增简历数": 123123, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 332, "简历推荐率": 1.0, "面试转化率": 11.37, "入职转化率": 9.35 },
+            { "分支简称": "分支2", "职位数": 25, "新增简历数": 244, "简历推荐数": 244, "面试中总数": 24, "入职数": 6, "招聘账号数": 2225, "简历推荐率": 100.0, "面试转化率": 9.84, "入职转化率": 25.0 },
+            { "分支简称": "分支3", "职位数": 12, "新增简历数": 46, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 444, "简历推荐率": 65.22, "面试转化率": 16.67, "入职转化率": 20.0 },
+            { "分支简称": "分支4", "职位数": 25, "新增简历数": 278, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 5, "简历推荐率": 57.55, "面试转化率": 43.75, "入职转化率": 22.86 },
+            { "分支简称": "分支5", "职位数": 7, "新增简历数": 4, "简历推荐数": 4, "面试中总数": 4, "入职数": 4, "招聘账号数": 25, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0 },
+            { "分支简称": "分支6", "职位数": 21, "新增简历数": 123123, "简历推荐数": 12311, "面试中总数": 1231, "入职数": 245, "招聘账号数": 5552, "简历推荐率": 10.0, "面试转化率": 10.0, "入职转化率": 19.9 },
+            { "分支简称": "分支7", "职位数": 26, "新增简历数": 25, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 25, "简历推荐率": 4892.0, "面试转化率": 11.37, "入职转化率": 9.35 },
+            { "分支简称": "分支8", "职位数": 9, "新增简历数": 2525, "简历推荐数": 254, "面试中总数": 24, "入职数": 6, "招聘账号数": 25, "简历推荐率": 10.06, "面试转化率": 9.45, "入职转化率": 25.0 },
+            { "分支简称": "分支9", "职位数": 555, "新增简历数": 402, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 252, "简历推荐率": 7.46, "面试转化率": 16.67, "入职转化率": 20.0 },
+            { "分支简称": "分支10", "职位数": 38, "新增简历数": 629, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 7, "简历推荐率": 25.44, "面试转化率": 43.75, "入职转化率": 22.86 }
         ];
 
         const branch_data = [
@@ -262,37 +256,72 @@
 
         <!-- 图表区域 -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-
-            <!-- 项目数 -->
+            <!-- 趋势分析 -->
             <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-lg font-semibold text-gray-900">项目数</h2>
-                    <div class="text-sm text-gray-500">
-                        <i class="fas fa-info-circle mr-1"></i> Top 10
+                    <h2 class="text-lg font-semibold text-gray-900">月度招聘趋势</h2>
+                    <div class="flex space-x-2">
+                        <button id="trend-6m" class="text-sm px-3 py-1 bg-blue-600 text-white rounded-md">6个月</button>
+                        <button id="trend-1y" class="text-sm px-3 py-1 bg-gray-200 text-gray-700 rounded-md">1年</button>
                     </div>
                 </div>
                 <div class="h-80">
-                    <canvas id="branch-rank-chart" width="400" height="300"></canvas>
+                    <canvas id="trend-chart"></canvas>
                 </div>
             </div>
 
-            <!-- 热门需求 -->
+            <!-- 需求洞察 -->
             <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-lg font-semibold text-gray-900">热门需求</h2>
+                    <h2 class="text-lg font-semibold text-gray-900">招聘需求分布</h2>
                     <div class="text-sm text-gray-500">
-                        <i class="fas fa-info-circle mr-1"></i> Top 10
+                        <i class="fas fa-info-circle mr-1"></i> 按职位数统计
                     </div>
                 </div>
                 <div class="h-80">
-                    <canvas id="position-rank-chart" width="400" height="300"></canvas>
+                    <canvas id="dept-chart"></canvas>
                 </div>
             </div>
         </div>
 
         <!-- 分支数据区域 -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- 分支招聘数据 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-semibold text-gray-900">分支招聘转化分析</h2>
+                    <div class="relative">
+                        <select id="branch-metric"
+                            class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 appearance-none pr-8">
+                            <option value="职位数">职位数</option>
+                            <option value="新增简历数">新增简历数</option>
+                            <option value="简历推荐数">简历推荐数</option>
+                            <option value="面试中总数">需求人数</option>
+                            <option value="入职数">入职数</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-80">
+                    <canvas id="branch-chart"></canvas>
+                </div>
+            </div>
 
+            <!-- 职位热度 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-semibold text-gray-900">热门职位需求</h2>
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-fire text-red-500 mr-1"></i> 热度指数
+                    </div>
+                </div>
+                <div class="h-80">
+                    <canvas id="position-chart"></canvas>
+                </div>
+            </div>
         </div>
 
         <!-- 分支数据明细 -->
@@ -302,12 +331,12 @@
                 <div class="relative">
                     <select id="rank-metric"
                         class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 appearance-none pr-8">
-                        <option value="项目数">项目数</option>
-                        <option value="成功项目数">成功项目数</option>
-                        <option value="职位数">新增职位</option>
-                        <option value="简历推荐数">简历推荐</option>
-                        <option value="需求人数">需求人数</option>
-                        <option value="入职数">入职人数</option>
+                        <option value="职位数">项目排名</option>
+                        <option value="新增简历数">成功项目排名</option>
+                        <option value="简历推荐数">新增职位排名</option>
+                        <option value="简历推荐数">简历推荐排名</option>
+                        <option value="面试中总数">需求人数排名</option>
+                        <option value="入职数">入职人数排名</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <i class="fas fa-chevron-down text-xs"></i>
@@ -356,25 +385,10 @@
             updateKPI('total');
 
             // 初始化图表
-            setTimeout(function() {
-                // 检查Chart.js是否已正确加载
-                if (typeof Chart !== 'undefined') {
-                    console.log('Chart.js version:', Chart.version);
-                    initBranchRankChart();
-                    initPositionRankChart();
-                } else {
-                    console.error('Chart.js failed to load');
-                    // 显示错误信息
-                    const branchChartElement = document.getElementById('branch-rank-chart');
-                    const positionChartElement = document.getElementById('position-rank-chart');
-                    if (branchChartElement) {
-                        branchChartElement.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">图表库加载失败</div>';
-                    }
-                    if (positionChartElement) {
-                        positionChartElement.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">图表库加载失败</div>';
-                    }
-                }
-            }, 500);
+            initTrendChart(6);
+            initDeptChart();
+            initBranchChart('职位数');
+            initPositionChart();
 
             // 初始化表格
             updateBranchTable('职位数');
@@ -382,6 +396,26 @@
             // 事件监听
             document.getElementById('kpi-period').addEventListener('change', function (e) {
                 updateKPI(e.target.value);
+            });
+
+            document.getElementById('trend-6m').addEventListener('click', function () {
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                this.classList.add('bg-blue-600', 'text-white');
+                document.getElementById('trend-1y').classList.remove('bg-blue-600', 'text-white');
+                document.getElementById('trend-1y').classList.add('bg-gray-200', 'text-gray-700');
+                initTrendChart(6);
+            });
+
+            document.getElementById('trend-1y').addEventListener('click', function () {
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                this.classList.add('bg-blue-600', 'text-white');
+                document.getElementById('trend-6m').classList.remove('bg-blue-600', 'text-white');
+                document.getElementById('trend-6m').classList.add('bg-gray-200', 'text-gray-700');
+                initTrendChart(12);
+            });
+
+            document.getElementById('branch-metric').addEventListener('change', function (e) {
+                initBranchChart(e.target.value);
             });
 
             document.getElementById('rank-metric').addEventListener('change', function (e) {
@@ -477,134 +511,145 @@
             });
         }
 
-        // 初始化项目数图表
-        function initBranchRankChart() {
-            console.log('Initializing branch rank chart...');
-            
-            const ctx = document.getElementById('branch-rank-chart');
-            if (!ctx) {
-                console.error('Cannot find branch-rank-chart element');
-                return;
+        // 初始化部门分布图表
+        function initDeptChart() {
+            const ctx = document.getElementById('dept-chart').getContext('2d');
+
+            if (window.deptChart) {
+                window.deptChart.destroy();
             }
-            
-            // 检查Chart.js是否已加载
-            if (typeof Chart === 'undefined') {
-                console.error('Chart.js is not loaded');
-                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">图表库加载失败</div>';
-                return;
-            }
-            
-            try {
-                // 获取职位数排名前10的分支
-                const sortedBranches = [...branch_data].sort((a, b) => b.职位数 - a.职位数).slice(0, 10);
-                const labels = sortedBranches.map(branch => branch.分支简称);
-                const data = sortedBranches.map(branch => branch.职位数);
-                
-                console.log('Chart data:', { labels, data });
-                
-                // 创建横向柱状图
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: '职位数',
-                            data: data,
-                            backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                            borderColor: 'rgba(59, 130, 246, 1)',
-                            borderWidth: 1
-                        }]
+
+            window.deptChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: dept_data.map(d => d.部门),
+                    datasets: [{
+                        data: dept_data.map(d => d.职位数),
+                        backgroundColor: [
+                            '#3B82F6', '#10B981', '#F59E0B', '#EF4444',
+                            '#8B5CF6', '#06B6D4', '#84CC16', '#F97316'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 15
+                            }
+                        }
                     },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-                
-                console.log('Branch rank chart initialized successfully');
-            } catch (error) {
-                console.error('Error initializing branch rank chart:', error);
-                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">图表加载失败: ' + error.message + '</div>';
-            }
-        }
-        
-        // 初始化热门需求图表
-        function initPositionRankChart() {
-            console.log('Initializing position rank chart...');
-            
-            const ctx = document.getElementById('position-rank-chart');
-            if (!ctx) {
-                console.error('Cannot find position-rank-chart element');
-                return;
-            }
-            
-            // 检查Chart.js是否已加载
-            if (typeof Chart === 'undefined') {
-                console.error('Chart.js is not loaded');
-                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">图表库加载失败</div>';
-                return;
-            }
-            
-            try {
-                // 获取需求量排名前10的岗位类型
-                const sortedPositions = [...position_data].sort((a, b) => b.需求量 - a.需求量).slice(0, 10);
-                const labels = sortedPositions.map(position => position.职位);
-                const data = sortedPositions.map(position => position.需求量);
-                
-                console.log('Position chart data:', { labels, data });
-                
-                // 创建横向柱状图
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: '需求量',
-                            data: data,
-                            backgroundColor: 'rgba(16, 185, 129, 0.8)',
-                            borderColor: 'rgba(16, 185, 129, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-                
-                console.log('Position rank chart initialized successfully');
-            } catch (error) {
-                console.error('Error initializing position rank chart:', error);
-                ctx.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">图表加载失败: ' + error.message + '</div>';
-            }
+                    cutout: '60%'
+                }
+            });
         }
 
+        // 初始化分支图表
+        function initBranchChart(metric) {
+            const ctx = document.getElementById('branch-chart').getContext('2d');
+            const data = branch_data.slice(0, 10); // 只显示前10个分支
 
+            if (window.branchChart) {
+                window.branchChart.destroy();
+            }
+
+            window.branchChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(d => d.分支简称),
+                    datasets: [{
+                        label: metric,
+                        data: data.map(d => d[metric]),
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 初始化职位热度图表
+        function initPositionChart() {
+            const ctx = document.getElementById('position-chart').getContext('2d');
+            const data = position_data.sort((a, b) => b.热度指数 - a.热度指数);
+
+            if (window.positionChart) {
+                window.positionChart.destroy();
+            }
+
+            window.positionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(d => d.职位),
+                    datasets: [{
+                        label: '热度指数',
+                        data: data.map(d => d.热度指数),
+                        backgroundColor: data.map((d, i) => {
+                            const alpha = 0.8 - (i * 0.05);
+                            return `rgba(239, 68, 68, ${alpha})`;
+                        }),
+                        borderColor: 'rgb(239, 68, 68)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
         // 更新分支表格
         function updateBranchTable(metric) {
             const tbody = document.getElementById('branch-table-body');
-            let sortedData = [...branch_data];
-            
-            // 根据选择的指标进行排序
-            if (metric === "项目数") {
-                sortedData.sort((a, b) => b.职位数 - a.职位数);
-            } else if (metric === "成功项目数") {
-                sortedData.sort((a, b) => b.新增简历数 - a.新增简历数);
-            } else if (metric === "职位数") {
-                sortedData.sort((a, b) => b.简历推荐数 - a.简历推荐数);
-            } else if (metric === "简历推荐数") {
-                sortedData.sort((a, b) => b.简历推荐数 - a.简历推荐数);
-            } else if (metric === "需求人数") {
-                sortedData.sort((a, b) => b.面试中总数 - a.面试中总数);
-            } else if (metric === "入职数") {
-                sortedData.sort((a, b) => b.入职数 - a.入职数);
-            } else {
-                // 默认按职位数排序
-                sortedData.sort((a, b) => b.职位数 - a.职位数);
-            }
+            const sortedData = [...branch_data].sort((a, b) => b[metric] - a[metric]);
 
             tbody.innerHTML = '';
 
