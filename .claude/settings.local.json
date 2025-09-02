@@ -4,7 +4,18 @@
       "Bash(curl:*)",
       "Bash(python:*)",
       "Bash(git init)",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Add recruitment dashboard project\n\n- Add main dashboard with KPI metrics\n- Include charts for recruitment data visualization  \n- Add responsive design with dark/light theme\n- Include assets (CSS, JS, Chart.js library)\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git remote add origin https://github.com/MaxL3e/DashBoard.git)",
+      "Bash(git push -u origin main --force)",
+      "Bash(git config --global http.sslVerify false)",
+      "Bash(git config --global http.sslVerify true)",
+      "Bash(mv recruitment-dashboard/* .)",
+      "Bash(mv recruitment-dashboard/.* .)",
+      "Bash(cp -r recruitment-dashboard/* .)",
+      "Bash(rm -rf recruitment-dashboard)",
+      "Bash(git commit -m \"Move files to root for GitHub Pages\")",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []
