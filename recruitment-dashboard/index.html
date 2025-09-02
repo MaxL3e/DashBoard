@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>招聘数据中心 | Jobs Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMwMDdBRkYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiA3QzE2IDUuOSAxNS4xIDUgMTQgNUgxMEM4LjkgNSA4IDUuOSA4IDdWOUg2Vjc4SDE4VjlIMTZWN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDlIMTZWMTlIOFY5WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/jobs.css">
+    <link rel="stylesheet" href="assets/css/charts.css">
+    <!-- 直接使用本地 Chart.js 文件，避免网络问题 -->
+    <script src="assets/js/vendor/chart.min.js"></script>
+    <script>
+        // 验证 Chart.js 加载状态
+        window.addEventListener('load', function() {
+            if (window.Chart) {
+                console.log('✓ Chart.js 加载成功，版本:', Chart.version);
+                window.chartLibraryLoaded = true;
+            } else {
+                console.error('❌ Chart.js 加载失败');
+                window.chartLibraryLoadError = true;
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="dashboard-container">
+        
+        <!-- 顶部导航栏 -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">🎯</div>
+                    <h1 class="dashboard-title">招聘数据中心</h1>
+                </div>
+                <div class="date-section">
+                    <div class="current-date" id="currentDate"></div>
+                    <button class="theme-toggle" id="themeToggle">🌓</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- KPI 核心指标区域 -->
+        <section class="kpi-section">
+            <div class="kpi-grid">
+                <div class="kpi-card highlight">
+                    <div class="kpi-icon">👥</div>
+                    <div class="kpi-content">
+                        <div class="kpi-number" data-number="128">0</div>
+                        <div class="kpi-label">本月入职</div>
+                        <div class="kpi-trend positive">
+                            <span class="trend-arrow">↗</span>
+                            <span class="trend-value">+23%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">🎯</div>
+                    <div class="kpi-content">
+                        <div class="kpi-number" data-number="94">0</div>
+                        <div class="kpi-unit">%</div>
+                        <div class="kpi-label">招聘完成率</div>
+                        <div class="kpi-trend positive">
+                            <span class="trend-arrow">↗</span>
+                            <span class="trend-value">+8%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">⏱️</div>
+                    <div class="kpi-content">
+                        <div class="kpi-number" data-number="18">0</div>
+                        <div class="kpi-unit">天</div>
+                        <div class="kpi-label">平均招聘周期</div>
+                        <div class="kpi-trend negative">
+                            <span class="trend-arrow">↘</span>
+                            <span class="trend-value">-2天</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-content">
+                        <div class="kpi-number" data-number="1.2">0</div>
+                        <div class="kpi-unit">万元</div>
+                        <div class="kpi-label">人均成本</div>
+                        <div class="kpi-trend positive">
+                            <span class="trend-arrow">↘</span>
+                            <span class="trend-value">-0.3万</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主图表区域 -->
+        <section class="main-chart-section">
+            <div class="chart-card main-chart">
+                <div class="chart-header">
+                    <h3 class="chart-title">月度招聘趋势</h3>
+                    <div class="chart-controls">
+                        <button class="control-btn active" data-period="6m">6个月</button>
+                        <button class="control-btn" data-period="1y">1年</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 辅助图表区域 -->
+        <section class="secondary-charts-section">
+            <div class="charts-grid">
+                
+                <!-- 部门招聘分布 -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">部门招聘分布</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="departmentChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 招聘渠道效果 -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">渠道转化效果</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="channelChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 职位需求热度 -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">职位需求热度</h3>
+                    </div>
+                    <div class="chart-container">
+                        <div class="position-heat-map" id="positionHeatMap"></div>
+                    </div>
+                </div>
+
+                <!-- 候选人质量分析 -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">候选人质量评估</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="qualityChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 最新职位列表 -->
+        <section class="data-table-section">
+            <div class="table-card">
+                <div class="table-header">
+                    <h3 class="table-title">最新职位动态</h3>
+                    <div class="table-controls">
+                        <button class="control-btn">刷新</button>
+                        <button class="control-btn">导出</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="jobsTable">
+                        <thead>
+                            <tr>
+                                <th>职位名称</th>
+                                <th>部门</th>
+                                <th>发布时间</th>
+                                <th>申请人数</th>
+                                <th>面试进度</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobsTableBody">
+                            <!-- 表格内容将通过 JavaScript 动态填充 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">正在加载数据...</div>
+    </div>
+
+    <!-- JavaScript 文件 -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
