@@ -248,6 +248,48 @@ body {
     font-size: 16px;
 }
 
+/* KPI时间选择器 */
+.kpi-time-selector {
+    margin-bottom: var(--space-lg);
+    display: flex;
+    justify-content: center;
+}
+
+.time-controls {
+    display: flex;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-medium);
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+}
+
+.time-btn {
+    padding: var(--space-sm) var(--space-lg);
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.time-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.time-btn.active {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.time-btn:not(:last-child) {
+    border-right: 1px solid var(--border-light);
+}
+
 /* 主图表区域 */
 .main-chart-section {
     margin-bottom: var(--space-xl);

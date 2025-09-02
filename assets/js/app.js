@@ -132,13 +132,24 @@ class RecruitmentDashboard {
         }
         
         // 图表时间段切换按钮
-        const controlBtns = document.querySelectorAll('[data-period]');
+        const controlBtns = document.querySelectorAll('.main-chart .control-btn[data-period]');
         controlBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const period = e.target.getAttribute('data-period');
                 if (window.chartFunctions) {
                     window.chartFunctions.switchTimePeriod(period);
                 }
+            });
+        });
+
+        // KPI时间维度切换
+        const timeButtons = document.querySelectorAll('.time-btn');
+        this.currentTimePeriod = 'month'; // 默认显示当月数据
+        
+        timeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const period = e.target.getAttribute('data-period');
+                this.switchTimePeriod(period);
             });
         });
         
@@ -539,6 +550,36 @@ class RecruitmentDashboard {
         this.showNotification(`错误: ${message}`, 'error');
     }
     
+    // 切换时间维度
+    switchTimePeriod(period) {
+        // 更新按钮状态
+        document.querySelectorAll('.time-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-period="${period}"]`).classList.add('active');
+        
+        this.currentTimePeriod = period;
+        
+        // 更新KPI数值
+        this.updateKPITimePeriod(period);
+    }
+
+    // 更新KPI时间期间数据
+    updateKPITimePeriod(period) {
+        const kpiNumbers = document.querySelectorAll('.kpi-number');
+        
+        kpiNumbers.forEach((element) => {
+            const periodValue = element.getAttribute(`data-period-${period}`);
+            if (periodValue) {
+                const currentValue = parseFloat(element.textContent);
+                const newValue = parseFloat(periodValue);
+                
+                // 使用动画过渡
+                this.animateNumber(element, currentValue, newValue, 500);
+            }
+        });
+    }
+
     // 延迟工具函数
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
