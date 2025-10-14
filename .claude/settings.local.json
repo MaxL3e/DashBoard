@@ -24,7 +24,8 @@
       "Bash(sed -n '327,372p' D:/vscode/databse/index.html)",
       "Bash(sed -i 's/分支招聘转化分析/分支排名数据/g' D:/vscode/databse/index.html)",
       "Bash(sed -n '287,330p' D:/vscode/databse/index.html)",
-      "WebFetch(domain:www.chartjs.org)"
+      "WebFetch(domain:www.chartjs.org)",
+      "Bash(start D:vscodedashboardindex.html)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,1214 @@
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>招聘项目管理系统 - 数据归集中心</title>
+    <script src="https://res.gemcoder.com/js/reload.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script>
+      tailwind.config = {
+                  theme: {
+                      extend: {
+                          colors: {
+                              primary: '#165DFF',
+                              secondary: '#36CFC9',
+                              success: '#52C41A',
+                              warning: '#FAAD14',
+                              danger: '#FF4D4F',
+                              info: '#8C8C8C',
+                              light: '#F5F7FA',
+                              dark: '#1D2129',
+                              'primary-light': '#E8F3FF',
+                              'secondary-light': '#E6FFFA',
+                              'success-light': '#F6FFED',
+                              'warning-light': '#FFFBE6',
+                              'danger-light': '#FFF1F0',
+                          },
+                          fontFamily: {
+                              inter: ['Inter', 'system-ui', 'sans-serif'],
+                          },
+                          spacing: {
+                              '5.5': '1.375rem',
+                              '18': '4.5rem',
+                              '22': '5.5rem',
+                          },
+                          boxShadow: {
+                              'card': '0 2px 8px 0 rgba(0, 0, 0, 0.08)',
+                              'card-hover': '0 4px 16px 0 rgba(0, 0, 0, 0.12)',
+                          }
+                      },
+                  }
+              }
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+          .content-auto {
+              content-visibility: auto;
+          }
+          .scrollbar-hide {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+          }
+          .scrollbar-hide::-webkit-scrollbar {
+              display: none;
+          }
+          .text-shadow {
+              text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          }
+          .bg-gradient-blue {
+              background: linear-gradient(135deg, #165DFF 0%, #36CFC9 100%);
+          }
+          .card-transition {
+              transition: all 0.3s ease;
+          }
+      }
+    </style>
+  </head>
+  <body class="font-inter bg-gray-50 text-dark min-h-screen flex flex-col">
+    <!-- 顶部导航栏 -->
+    <header
+      class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300"
+    >
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- 左侧Logo和标题 -->
+          <div class="flex items-center space-x-3">
+            <div class="bg-primary text-white p-2 rounded-lg">
+              <i class="fas fa-briefcase text-xl"> </i>
+            </div>
+            <div>
+              <h1 class="text-lg font-bold text-dark hidden sm:block">
+                招聘项目管理系统
+              </h1>
+              <p class="text-xs text-info hidden sm:block">数据中心</p>
+            </div>
+          </div>
+          <!-- 右侧用户信息 -->
+          <div class="flex items-center space-x-4">
+            <button
+              class="p-2 rounded-full hover:bg-gray-100 transition-colors relative"
+            >
+              <i class="far fa-bell text-gray-500"> </i>
+              <span
+                class="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"
+              >
+              </span>
+            </button>
+            <div class="flex items-center space-x-2">
+              <img
+                src="https://design.gemcoder.com/staticResource/echoAiSystemImages/0b772c54f6dab25f4dbc8428f16a5c3f.png"
+                alt="用户头像"
+                class="w-8 h-8 rounded-full object-cover border-2 border-primary-light"
+              />
+              <div class="hidden md:block">
+                <p class="text-sm font-medium">张经理</p>
+                <p class="text-xs text-info">总部管理员</p>
+              </div>
+              <i class="fas fa-chevron-down text-xs text-gray-400"> </i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- 主内容区 -->
+    <main class="flex flex-1 overflow-hidden">
+      <!-- 侧边栏 -->
+      <aside
+        class="w-16 sm:w-64 bg-white shadow-sm flex flex-col transition-all duration-300 z-40"
+      >
+        <nav class="flex-1 overflow-y-auto scrollbar-hide py-4">
+          <ul>
+            <li class="mb-1">
+              <a
+                href="javascript:void(0);"
+                class="flex items-center px-4 py-3 text-primary bg-primary-light"
+              >
+                <i class="fas fa-tachometer-alt w-6 text-center"> </i>
+                <span class="ml-3 hidden sm:block font-medium"> 数据中心 </span>
+              </a>
+            </li>
+            <li class="mb-1">
+              <a
+                href="javascript:void(0);"
+                class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-building w-6 text-center"> </i>
+                <span class="ml-3 hidden sm:block"> 分支机构 </span>
+              </a>
+            </li>
+            <li class="mb-1">
+              <a
+                href="javascript:void(0);"
+                class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-tasks w-6 text-center"> </i>
+                <span class="ml-3 hidden sm:block"> 项目管理 </span>
+              </a>
+            </li>
+            <li class="mb-1">
+              <a
+                href="javascript:void(0);"
+                class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-user-plus w-6 text-center"> </i>
+                <span class="ml-3 hidden sm:block"> 候选人管理 </span>
+              </a>
+            </li>
+            <li class="mb-1">
+              <a
+                href="javascript:void(0);"
+                class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-file-alt w-6 text-center"> </i>
+                <span class="ml-3 hidden sm:block"> 报表分析 </span>
+              </a>
+            </li>
+            <li class="mb-1">
+              <a
+                href="javascript:void(0);"
+                class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-cog w-6 text-center"> </i>
+                <span class="ml-3 hidden sm:block"> 系统设置 </span>
+              </a>
+            </li>
+          </ul>
+          <div class="mt-8 px-4 hidden sm:block">
+            <p
+              class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2"
+            >
+              分支机构
+            </p>
+            <ul>
+              <li class="mb-1">
+                <a
+                  href="javascript:void(0);"
+                  class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-circle text-xs text-success mr-2"> </i>
+                  <span> 北京分公司 </span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a
+                  href="javascript:void(0);"
+                  class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-circle text-xs text-success mr-2"> </i>
+                  <span> 上海分公司 </span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a
+                  href="javascript:void(0);"
+                  class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-circle text-xs text-success mr-2"> </i>
+                  <span> 广州分公司 </span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a
+                  href="javascript:void(0);"
+                  class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-circle text-xs text-warning mr-2"> </i>
+                  <span> 深圳分公司 </span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a
+                  href="javascript:void(0);"
+                  class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-circle text-xs text-danger mr-2"> </i>
+                  <span> 成都分公司 </span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a
+                  href="javascript:void(0);"
+                  class="flex items-center px-3 py-2 text-sm text-gray-500 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-plus text-xs mr-2"> </i>
+                  <span> 查看全部 </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="p-4 border-t border-gray-100 hidden sm:block">
+          <div class="bg-light rounded-lg p-3">
+            <div class="flex items-start">
+              <div class="bg-primary/10 p-2 rounded-lg">
+                <i class="fas fa-rocket text-primary"> </i>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium">系统更新</p>
+                <p class="text-xs text-gray-500 mt-1">V2.3.1版本已发布</p>
+                <button class="mt-2 text-xs text-primary">查看详情</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- 内容区域 -->
+      <div class="flex-1 overflow-y-auto bg-gray-50 p-4 sm:p-6">
+        <!-- 页面标题和筛选 -->
+        <div class="mb-6">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4"
+          >
+            <div>
+              <h2 class="text-[clamp(1.25rem,3vw,1.75rem)] font-bold text-dark">
+                分支机构招聘数据总览
+              </h2>
+              <p class="text-gray-500 mt-1">
+                实时监控各分支机构招聘项目进展与数据指标
+              </p>
+            </div>
+            <div class="mt-4 sm:mt-0 flex flex-wrap gap-3">
+              <div class="relative">
+                <select
+                  class="appearance-none bg-white border border-gray-200 rounded-lg py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                >
+                  <option>全部时间</option>
+                  <option>本月</option>
+                  <option>本季度</option>
+                  <option>本年度</option>
+                  <option>自定义</option>
+                </select>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400"
+                >
+                  <i class="fas fa-chevron-down text-xs"> </i>
+                </div>
+              </div>
+              <div class="relative">
+                <select
+                  class="appearance-none bg-white border border-gray-200 rounded-lg py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                >
+                  <option>全部分支机构</option>
+                  <option>华北区域</option>
+                  <option>华东区域</option>
+                  <option>华南区域</option>
+                  <option>西部区域</option>
+                </select>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400"
+                >
+                  <i class="fas fa-chevron-down text-xs"> </i>
+                </div>
+              </div>
+              <button
+                class="bg-white border border-gray-200 rounded-lg py-2 px-4 text-sm flex items-center hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-download mr-2 text-gray-500"> </i>
+                <span> 导出数据 </span>
+              </button>
+            </div>
+          </div>
+          <!-- 数据概览卡片 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- 总项目数 -->
+            <div
+              class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover"
+            >
+              <div class="flex items-start justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">总招聘项目数</p>
+                  <h3 class="text-2xl font-bold mt-1">126</h3>
+                  <div class="flex items-center mt-2 text-success text-sm">
+                    <i class="fas fa-arrow-up mr-1"> </i>
+                    <span> 8.2% </span>
+                    <span class="text-gray-400 ml-1"> 较上月 </span>
+                  </div>
+                </div>
+                <div class="bg-primary/10 p-3 rounded-lg">
+                  <i class="fas fa-tasks text-primary"> </i>
+                </div>
+              </div>
+              <div class="mt-4 h-12">
+                <canvas id="projectChart" width="100%" height="48"> </canvas>
+              </div>
+            </div>
+            <!-- 总职位数 -->
+            <div
+              class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover"
+            >
+              <div class="flex items-start justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">总招聘职位数</p>
+                  <h3 class="text-2xl font-bold mt-1">542</h3>
+                  <div class="flex items-center mt-2 text-success text-sm">
+                    <i class="fas fa-arrow-up mr-1"> </i>
+                    <span> 12.5% </span>
+                    <span class="text-gray-400 ml-1"> 较上月 </span>
+                  </div>
+                </div>
+                <div class="bg-secondary/10 p-3 rounded-lg">
+                  <i class="fas fa-briefcase text-secondary"> </i>
+                </div>
+              </div>
+              <div class="mt-4 h-12">
+                <canvas id="positionChart" width="100%" height="48"> </canvas>
+              </div>
+            </div>
+            <!-- 总简历数 -->
+            <div
+              class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover"
+            >
+              <div class="flex items-start justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">收到简历总数</p>
+                  <h3 class="text-2xl font-bold mt-1">12,846</h3>
+                  <div class="flex items-center mt-2 text-success text-sm">
+                    <i class="fas fa-arrow-up mr-1"> </i>
+                    <span> 15.3% </span>
+                    <span class="text-gray-400 ml-1"> 较上月 </span>
+                  </div>
+                </div>
+                <div class="bg-success/10 p-3 rounded-lg">
+                  <i class="fas fa-file-alt text-success"> </i>
+                </div>
+              </div>
+              <div class="mt-4 h-12">
+                <canvas id="resumeChart" width="100%" height="48"> </canvas>
+              </div>
+            </div>
+            <!-- 已入职人数 -->
+            <div
+              class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover"
+            >
+              <div class="flex items-start justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">已入职人数</p>
+                  <h3 class="text-2xl font-bold mt-1">189</h3>
+                  <div class="flex items-center mt-2 text-warning text-sm">
+                    <i class="fas fa-arrow-down mr-1"> </i>
+                    <span> 2.1% </span>
+                    <span class="text-gray-400 ml-1"> 较上月 </span>
+                  </div>
+                </div>
+                <div class="bg-warning/10 p-3 rounded-lg">
+                  <i class="fas fa-user-check text-warning"> </i>
+                </div>
+              </div>
+              <div class="mt-4 h-12">
+                <canvas id="hiredChart" width="100%" height="48"> </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 图表区域 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          <!-- 区域分布图表 -->
+          <div class="lg:col-span-2 bg-white rounded-xl shadow-card p-5">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="font-semibold text-lg">各区域招聘项目分布</h3>
+                <p class="text-sm text-gray-500">按分支机构所在区域统计</p>
+              </div>
+              <div class="flex space-x-2">
+                <button
+                  class="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full"
+                >
+                  项目数
+                </button>
+                <button
+                  class="px-3 py-1 text-xs text-gray-500 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  职位数
+                </button>
+                <button
+                  class="px-3 py-1 text-xs text-gray-500 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  简历数
+                </button>
+              </div>
+            </div>
+            <div class="h-[300px]">
+              <div id="regionDistributionChart" class="w-full h-full"></div>
+            </div>
+          </div>
+          <!-- 完成率图表 -->
+          <div class="bg-white rounded-xl shadow-card p-5">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="font-semibold text-lg">招聘项目完成率</h3>
+                <p class="text-sm text-gray-500">各分支机构项目完成情况</p>
+              </div>
+              <button class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-ellipsis-v"> </i>
+              </button>
+            </div>
+            <div class="h-[300px]">
+              <div id="completionRateChart" class="w-full h-full"></div>
+            </div>
+          </div>
+        </div>
+        <!-- 数据表格和漏斗图 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- 分支机构数据表格 -->
+          <div
+            class="lg:col-span-2 bg-white rounded-xl shadow-card overflow-hidden"
+          >
+            <div class="p-5 border-b border-gray-100">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold text-lg">分支机构招聘数据</h3>
+                  <p class="text-sm text-gray-500">各分支机构关键招聘指标</p>
+                </div>
+                <div class="relative">
+                  <input
+                    type="text"
+                    placeholder="搜索分支机构..."
+                    class="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary w-full sm:w-64"
+                  />
+                  <i
+                    class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  >
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="bg-gray-50 text-left">
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      分支机构
+                    </th>
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      项目数
+                    </th>
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      职位数
+                    </th>
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      简历数
+                    </th>
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      完成率
+                    </th>
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      平均周期
+                    </th>
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      状态
+                    </th>
+                    <th
+                      class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      操作
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <img
+                          src="https://design.gemcoder.com/staticResource/echoAiSystemImages/b724f49c54adcb7a26c4de6185e86818.png"
+                          alt="北京分公司"
+                          class="w-8 h-8 rounded-full object-cover mr-3"
+                        />
+                        <div>
+                          <div class="font-medium">北京分公司</div>
+                          <div class="text-xs text-gray-500">华北区域</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">24</td>
+                    <td class="px-5 py-4 whitespace-nowrap">98</td>
+                    <td class="px-5 py-4 whitespace-nowrap">2,456</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                          <div
+                            class="bg-success h-2 rounded-full"
+                            style="width: 85%"
+                          ></div>
+                        </div>
+                        <span class="text-sm font-medium"> 85% </span>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">28天</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <span
+                        class="px-2 py-1 text-xs font-medium bg-success-light text-success rounded-full"
+                      >
+                        优秀
+                      </span>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap text-sm">
+                      <a
+                        href="javascript:void(0);"
+                        class="text-primary hover:text-primary/80 mr-3"
+                      >
+                        查看
+                      </a>
+                      <a
+                        href="javascript:void(0);"
+                        class="text-gray-500 hover:text-gray-700"
+                      >
+                        详情
+                      </a>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <img
+                          src="https://design.gemcoder.com/staticResource/echoAiSystemImages/99af49de4e836a1ff8fc256bd78d8548.png"
+                          alt="上海分公司"
+                          class="w-8 h-8 rounded-full object-cover mr-3"
+                        />
+                        <div>
+                          <div class="font-medium">上海分公司</div>
+                          <div class="text-xs text-gray-500">华东区域</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">18</td>
+                    <td class="px-5 py-4 whitespace-nowrap">76</td>
+                    <td class="px-5 py-4 whitespace-nowrap">1,892</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                          <div
+                            class="bg-primary h-2 rounded-full"
+                            style="width: 76%"
+                          ></div>
+                        </div>
+                        <span class="text-sm font-medium"> 76% </span>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">32天</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <span
+                        class="px-2 py-1 text-xs font-medium bg-primary-light text-primary rounded-full"
+                      >
+                        良好
+                      </span>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap text-sm">
+                      <a
+                        href="javascript:void(0);"
+                        class="text-primary hover:text-primary/80 mr-3"
+                      >
+                        查看
+                      </a>
+                      <a
+                        href="javascript:void(0);"
+                        class="text-gray-500 hover:text-gray-700"
+                      >
+                        详情
+                      </a>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <img
+                          src="https://design.gemcoder.com/staticResource/echoAiSystemImages/07f4df144e1c5ad4a5f94483d9b4d187.png"
+                          alt="广州分公司"
+                          class="w-8 h-8 rounded-full object-cover mr-3"
+                        />
+                        <div>
+                          <div class="font-medium">广州分公司</div>
+                          <div class="text-xs text-gray-500">华南区域</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">15</td>
+                    <td class="px-5 py-4 whitespace-nowrap">64</td>
+                    <td class="px-5 py-4 whitespace-nowrap">1,532</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                          <div
+                            class="bg-warning h-2 rounded-full"
+                            style="width: 65%"
+                          ></div>
+                        </div>
+                        <span class="text-sm font-medium"> 65% </span>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">36天</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <span
+                        class="px-2 py-1 text-xs font-medium bg-warning-light text-warning rounded-full"
+                      >
+                        一般
+                      </span>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap text-sm">
+                      <a
+                        href="javascript:void(0);"
+                        class="text-primary hover:text-primary/80 mr-3"
+                      >
+                        查看
+                      </a>
+                      <a
+                        href="javascript:void(0);"
+                        class="text-gray-500 hover:text-gray-700"
+                      >
+                        详情
+                      </a>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <img
+                          src="https://design.gemcoder.com/staticResource/echoAiSystemImages/f47c178ff6bbf9e487cac95accefd163.png"
+                          alt="深圳分公司"
+                          class="w-8 h-8 rounded-full object-cover mr-3"
+                        />
+                        <div>
+                          <div class="font-medium">深圳分公司</div>
+                          <div class="text-xs text-gray-500">华南区域</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">21</td>
+                    <td class="px-5 py-4 whitespace-nowrap">87</td>
+                    <td class="px-5 py-4 whitespace-nowrap">2,105</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                          <div
+                            class="bg-warning h-2 rounded-full"
+                            style="width: 62%"
+                          ></div>
+                        </div>
+                        <span class="text-sm font-medium"> 62% </span>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">41天</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <span
+                        class="px-2 py-1 text-xs font-medium bg-warning-light text-warning rounded-full"
+                      >
+                        一般
+                      </span>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap text-sm">
+                      <a
+                        href="javascript:void(0);"
+                        class="text-primary hover:text-primary/80 mr-3"
+                      >
+                        查看
+                      </a>
+                      <a
+                        href="javascript:void(0);"
+                        class="text-gray-500 hover:text-gray-700"
+                      >
+                        详情
+                      </a>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <img
+                          src="https://design.gemcoder.com/staticResource/echoAiSystemImages/7ac47663c6ab66a3b390808069cad5f3.png"
+                          alt="成都分公司"
+                          class="w-8 h-8 rounded-full object-cover mr-3"
+                        />
+                        <div>
+                          <div class="font-medium">成都分公司</div>
+                          <div class="text-xs text-gray-500">西部区域</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">12</td>
+                    <td class="px-5 py-4 whitespace-nowrap">45</td>
+                    <td class="px-5 py-4 whitespace-nowrap">987</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                          <div
+                            class="bg-danger h-2 rounded-full"
+                            style="width: 45%"
+                          ></div>
+                        </div>
+                        <span class="text-sm font-medium"> 45% </span>
+                      </div>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap">48天</td>
+                    <td class="px-5 py-4 whitespace-nowrap">
+                      <span
+                        class="px-2 py-1 text-xs font-medium bg-danger-light text-danger rounded-full"
+                      >
+                        滞后
+                      </span>
+                    </td>
+                    <td class="px-5 py-4 whitespace-nowrap text-sm">
+                      <a
+                        href="javascript:void(0);"
+                        class="text-primary hover:text-primary/80 mr-3"
+                      >
+                        查看
+                      </a>
+                      <a
+                        href="javascript:void(0);"
+                        class="text-gray-500 hover:text-gray-700"
+                      >
+                        详情
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="px-5 py-4 border-t border-gray-100 flex items-center justify-between"
+            >
+              <div class="text-sm text-gray-500">显示 1 至 5，共 24 条</div>
+              <div class="flex space-x-1">
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 text-gray-400 hover:border-primary hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled
+                >
+                  <i class="fas fa-chevron-left text-xs"> </i>
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded border border-primary bg-primary text-white"
+                >
+                  1
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 hover:border-primary hover:text-primary"
+                >
+                  2
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 hover:border-primary hover:text-primary"
+                >
+                  3
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 hover:border-primary hover:text-primary"
+                >
+                  4
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 hover:border-primary hover:text-primary"
+                >
+                  5
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 hover:border-primary hover:text-primary"
+                >
+                  <i class="fas fa-chevron-right text-xs"> </i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- 招聘漏斗图 -->
+          <div class="bg-white rounded-xl shadow-card p-5">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="font-semibold text-lg">招聘流程漏斗</h3>
+                <p class="text-sm text-gray-500">候选人转化情况分析</p>
+              </div>
+              <div class="relative">
+                <select
+                  class="appearance-none bg-gray-50 border border-gray-200 rounded-lg py-1.5 pl-3 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                >
+                  <option>全部分支机构</option>
+                  <option>北京分公司</option>
+                  <option>上海分公司</option>
+                  <option>广州分公司</option>
+                </select>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400"
+                >
+                  <i class="fas fa-chevron-down text-xs"> </i>
+                </div>
+              </div>
+            </div>
+            <div class="h-[400px]">
+              <div id="recruitmentFunnelChart" class="w-full h-full"></div>
+            </div>
+            <div class="mt-6 border-t border-gray-100 pt-6">
+              <h4 class="text-sm font-medium mb-4">关键转化率</h4>
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-500"> 简历筛选 → 面试 </span>
+                    <span class="font-medium"> 28.5% </span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-primary h-2 rounded-full"
+                      style="width: 28.5%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-500"> 面试 → Offer </span>
+                    <span class="font-medium"> 42.3% </span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-secondary h-2 rounded-full"
+                      style="width: 42.3%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-500"> Offer → 入职 </span>
+                    <span class="font-medium"> 78.6% </span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-success h-2 rounded-full"
+                      style="width: 78.6%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- JavaScript -->
+    <script>
+      // 页面加载完成后初始化
+              document.addEventListener('DOMContentLoaded', () => {
+                  // 初始化图表
+                  initCharts();
+
+                  // 监听窗口大小变化，调整图表尺寸
+                  window.addEventListener('resize', debounce(() => {
+                      if (window.regionDistributionChart) window.regionDistributionChart.resize();
+                      if (window.completionRateChart) window.completionRateChart.resize();
+                      if (window.recruitmentFunnelChart) window.recruitmentFunnelChart.resize();
+                  }, 200));
+              });
+
+              // 防抖函数
+              function debounce(func, wait) {
+                  let timeout;
+                  return function() {
+                      const context = this, args = arguments;
+                      clearTimeout(timeout);
+                      timeout = setTimeout(() => func.apply(context, args), wait);
+                  };
+              }
+
+              // 初始化所有图表
+              function initCharts() {
+                  // 区域分布图表
+                  initRegionDistributionChart();
+
+                  // 完成率图表
+                  initCompletionRateChart();
+
+                  // 招聘漏斗图
+                  initRecruitmentFunnelChart();
+
+                  // 迷你趋势图
+                  initMiniCharts();
+              }
+
+              // 区域分布图表
+              function initRegionDistributionChart() {
+                  const dom = document.getElementById('regionDistributionChart');
+                  const chart = echarts.init(dom);
+
+                  const option = {
+                      tooltip: {
+                          trigger: 'axis',
+                          axisPointer: {
+                              type: 'shadow'
+                          }
+                      },
+                      legend: {
+                          data: ['进行中项目', '已完成项目', '暂停项目'],
+                          bottom: 0
+                      },
+                      grid: {
+                          left: '3%',
+                          right: '4%',
+                          bottom: '15%',
+                          top: '5%',
+                          containLabel: true
+                      },
+                      xAxis: {
+                          type: 'category',
+                          data: ['北京', '上海', '广州', '深圳', '成都', '杭州', '武汉', '南京', '西安', '重庆'],
+                          axisLabel: {
+                              interval: 0,
+                              rotate: 30
+                          }
+                      },
+                      yAxis: {
+                          type: 'value',
+                          name: '项目数量'
+                      },
+                      series: [
+                          {
+                              name: '进行中项目',
+                              type: 'bar',
+                              stack: 'total',
+                              emphasis: {
+                                  focus: 'series'
+                              },
+                              data: [15, 10, 8, 12, 7, 6, 5, 4, 3, 4],
+                              itemStyle: {
+                                  color: '#165DFF'
+                              }
+                          },
+                          {
+                              name: '已完成项目',
+                              type: 'bar',
+                              stack: 'total',
+                              emphasis: {
+                                  focus: 'series'
+                              },
+                              data: [9, 8, 7, 9, 5, 4, 3, 3, 2, 3],
+                              itemStyle: {
+                                  color: '#52C41A'
+                              }
+                          },
+                          {
+                              name: '暂停项目',
+                              type: 'bar',
+                              stack: 'total',
+                              emphasis: {
+                                  focus: 'series'
+                              },
+                              data: [0, 0, 0, 0, 0, 2, 1, 0, 0, 0],
+                              itemStyle: {
+                                  color: '#FAAD14'
+                              }
+                          }
+                      ]
+                  };
+
+                  chart.setOption(option);
+                  window.regionDistributionChart = chart;
+              }
+
+              // 完成率图表
+              function initCompletionRateChart() {
+                  const dom = document.getElementById('completionRateChart');
+                  const chart = echarts.init(dom);
+
+                  const option = {
+                      tooltip: {
+                          trigger: 'item'
+                      },
+                      legend: {
+                          orient: 'vertical',
+                          left: 'left',
+                          bottom: 0,
+                          top: 'center'
+                      },
+                      series: [
+                          {
+                              name: '完成率',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              itemStyle: {
+                                  borderRadius: 10,
+                                  borderColor: '#fff',
+                                  borderWidth: 2
+                              },
+                              label: {
+                                  show: false,
+                                  position: 'center'
+                              },
+                              emphasis: {
+                                  label: {
+                                      show: true,
+                                      fontSize: 16,
+                                      fontWeight: 'bold'
+                                  }
+                              },
+                              labelLine: {
+                                  show: false
+                              },
+                              data: [
+                                  { value: 4, name: '优秀 (>80%)', itemStyle: { color: '#52C41A' } },
+                                  { value: 5, name: '良好 (70-80%)', itemStyle: { color: '#165DFF' } },
+                                  { value: 6, name: '一般 (60-70%)', itemStyle: { color: '#FAAD14' } },
+                                  { value: 3, name: '滞后 (<60%)', itemStyle: { color: '#FF4D4F' } }
+                              ]
+                          }
+                      ]
+                  };
+
+                  chart.setOption(option);
+                  window.completionRateChart = chart;
+              }
+
+              // 招聘漏斗图
+              function initRecruitmentFunnelChart() {
+                  const dom = document.getElementById('recruitmentFunnelChart');
+                  const chart = echarts.init(dom);
+
+                  const option = {
+                      tooltip: {
+                          trigger: 'item',
+                          formatter: '{a} <br/>{b}: {c} ({d}%)'
+                      },
+                      legend: {
+                          data: ['简历投递', '简历筛选', '面试', '复试', 'Offer', '入职'],
+                          bottom: 0
+                      },
+                      series: [
+                          {
+                              name: '候选人数量',
+                              type: 'funnel',
+                              left: '10%',
+                              top: '10%',
+                              right: '10%',
+                              bottom: '20%',
+                              minSize: '0%',
+                              maxSize: '100%',
+                              sort: 'descending',
+                              gap: 2,
+                              label: {
+                                  show: true,
+                                  position: 'inside'
+                              },
+                              labelLine: {
+                                  length: 10,
+                                  lineStyle: {
+                                      width: 1,
+                                      type: 'solid'
+                                  }
+                              },
+                              itemStyle: {
+                                  borderColor: '#fff',
+                                  borderWidth: 1
+                              },
+                              emphasis: {
+                                  label: {
+                                      fontSize: 16
+                                  }
+                              },
+                              data: [
+                                  { value: 12846, name: '简历投递', itemStyle: { color: '#E8F3FF' } },
+                                  { value: 3700, name: '简历筛选', itemStyle: { color: '#BEDAFF' } },
+                                  { value: 1256, name: '面试', itemStyle: { color: '#84B9FF' } },
+                                  { value: 532, name: '复试', itemStyle: { color: '#4E9AFF' } },
+                                  { value: 225, name: 'Offer', itemStyle: { color: '#165DFF' } },
+                                  { value: 177, name: '入职', itemStyle: { color: '#0E42D2' } }
+                              ]
+                          }
+                      ]
+                  };
+
+                  chart.setOption(option);
+                  window.recruitmentFunnelChart = chart;
+              }
+
+              // 迷你趋势图
+              function initMiniCharts() {
+                  // 简化版迷你图表，使用canvas绘制简单趋势线
+                  const drawMiniChart = (id, data, color) => {
+                      const canvas = document.getElementById(id);
+                      if (!canvas) return;
+
+                      const ctx = canvas.getContext('2d');
+                      const width = canvas.width;
+                      const height = canvas.height;
+
+                      // 清除画布
+                      ctx.clearRect(0, 0, width, height);
+
+                      // 设置数据
+                      const points = data;
+                      const pointCount = points.length;
+                      const segmentWidth = width / (pointCount - 1);
+                      const maxValue = Math.max(...points);
+                      const minValue = Math.min(...points);
+                      const valueRange = maxValue - minValue || 1; // 避免除以零
+
+                      // 绘制区域填充
+                      ctx.beginPath();
+                      ctx.moveTo(0, height);
+
+                      points.forEach((value, i) => {
+                          const x = i * segmentWidth;
+                          const y = height - ((value - minValue) / valueRange) * height * 0.8; // 留一些顶部空间
+
+                          if (i === 0) {
+                              ctx.moveTo(x, y);
+                          } else {
+                              ctx.lineTo(x, y);
+                          }
+                      });
+
+                      ctx.lineTo((pointCount - 1) * segmentWidth, height);
+                      ctx.closePath();
+                      ctx.fillStyle = color + '20'; // 添加透明度
+                      ctx.fill();
+
+                      // 绘制线条
+                      ctx.beginPath();
+
+                      points.forEach((value, i) => {
+                          const x = i * segmentWidth;
+                          const y = height - ((value - minValue) / valueRange) * height * 0.8;
+
+                          if (i === 0) {
+                              ctx.moveTo(x, y);
+                          } else {
+                              ctx.lineTo(x, y);
+                          }
+                      });
+
+                      ctx.strokeStyle = color;
+                      ctx.lineWidth = 2;
+                      ctx.stroke();
+
+                      // 绘制最后一个点
+                      const lastValue = points[points.length - 1];
+                      const lastX = (pointCount - 1) * segmentWidth;
+                      const lastY = height - ((lastValue - minValue) / valueRange) * height * 0.8;
+
+                      ctx.beginPath();
+                      ctx.arc(lastX, lastY, 3, 0, Math.PI * 2);
+                      ctx.fillStyle = color;
+                      ctx.fill();
+                  };
+
+                  // 为每个迷你图表绘制数据
+                  drawMiniChart('projectChart', [12, 15, 14, 18, 20, 22, 24], '#165DFF');
+                  drawMiniChart('positionChart', [76, 72, 80, 85, 90, 88, 98], '#36CFC9');
+                  drawMiniChart('resumeChart', [1856, 1920, 2050, 2180, 2250, 2380, 2456], '#52C41A');
+                  drawMiniChart('hiredChart', [175, 182, 190, 185, 192, 180, 177], '#FAAD14');
+              }
+    </script>
+  </body>
+</html>

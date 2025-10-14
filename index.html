@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>招聘数据仪表盘</title>
+    <title>招聘项目管理系统 - 数据归集中心</title>
 
     <!-- 静态资源 -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,28 +26,28 @@
         ];
 
         const branch_data = [
-            { "分支简称": "分支1", "职位数": 267, "新增简历数": 123123, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 332, "简历推荐率": 1.0, "面试转化率": 11.37, "入职转化率": 9.35 },
-            { "分支简称": "分支2", "职位数": 25, "新增简历数": 244, "简历推荐数": 244, "面试中总数": 24, "入职数": 6, "招聘账号数": 2225, "简历推荐率": 100.0, "面试转化率": 9.84, "入职转化率": 25.0 },
-            { "分支简称": "分支3", "职位数": 12, "新增简历数": 46, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 444, "简历推荐率": 65.22, "面试转化率": 16.67, "入职转化率": 20.0 },
-            { "分支简称": "分支4", "职位数": 25, "新增简历数": 278, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 5, "简历推荐率": 57.55, "面试转化率": 43.75, "入职转化率": 22.86 },
-            { "分支简称": "分支5", "职位数": 7, "新增简历数": 4, "简历推荐数": 4, "面试中总数": 4, "入职数": 4, "招聘账号数": 25, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0 },
-            { "分支简称": "分支6", "职位数": 21, "新增简历数": 123123, "简历推荐数": 12311, "面试中总数": 1231, "入职数": 245, "招聘账号数": 5552, "简历推荐率": 10.0, "面试转化率": 10.0, "入职转化率": 19.9 },
-            { "分支简称": "分支7", "职位数": 26, "新增简历数": 25, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 25, "简历推荐率": 4892.0, "面试转化率": 11.37, "入职转化率": 9.35 },
-            { "分支简称": "分支8", "职位数": 9, "新增简历数": 2525, "简历推荐数": 254, "面试中总数": 24, "入职数": 6, "招聘账号数": 25, "简历推荐率": 10.06, "面试转化率": 9.45, "入职转化率": 25.0 },
-            { "分支简称": "分支9", "职位数": 555, "新增简历数": 402, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 252, "简历推荐率": 7.46, "面试转化率": 16.67, "入职转化率": 20.0 },
-            { "分支简称": "分支10", "职位数": 38, "新增简历数": 629, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 7, "简历推荐率": 25.44, "面试转化率": 43.75, "入职转化率": 22.86 },
-            { "分支简称": "分支11", "职位数": 21, "新增简历数": 21, "简历推荐数": 21, "面试中总数": 21, "入职数": 21, "招聘账号数": 21, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0 },
-            { "分支简称": "分支12", "职位数": 33, "新增简历数": 333, "简历推荐数": 33, "面试中总数": 3, "入职数": 3, "招聘账号数": 33, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支13", "职位数": 44, "新增简历数": 444, "简历推荐数": 44, "面试中总数": 4, "入职数": 4, "招聘账号数": 44, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支14", "职位数": 55, "新增简历数": 555, "简历推荐数": 55, "面试中总数": 5, "入职数": 5, "招聘账号数": 55, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支15", "职位数": 66, "新增简历数": 666, "简历推荐数": 66, "面试中总数": 6, "入职数": 6, "招聘账号数": 66, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支16", "职位数": 77, "新增简历数": 777, "简历推荐数": 77, "面试中总数": 7, "入职数": 7, "招聘账号数": 77, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支17", "职位数": 88, "新增简历数": 888, "简历推荐数": 88, "面试中总数": 8, "入职数": 8, "招聘账号数": 88, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支18", "职位数": 99, "新增简历数": 999, "简历推荐数": 99, "面试中总数": 9, "入职数": 9, "招聘账号数": 99, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支19", "职位数": 101, "新增简历数": 1010, "简历推荐数": 101, "面试中总数": 10, "入职数": 10, "招聘账号数": 101, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支20", "职位数": 111, "新增简历数": 1111, "简历推荐数": 111, "面试中总数": 11, "入职数": 11, "招聘账号数": 111, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支21", "职位数": 121, "新增简历数": 1212, "简历推荐数": 121, "面试中总数": 12, "入职数": 12, "招聘账号数": 121, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 },
-            { "分支简称": "分支22", "职位数": 131, "新增简历数": 1313, "简历推荐数": 131, "面试中总数": 13, "入职数": 13, "招聘账号数": 131, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0 }
+            { "分支简称": "分支1", "职位数": 267, "新增简历数": 123123, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 332, "简历推荐率": 1.0, "面试转化率": 11.37, "入职转化率": 9.35, "进行中项目": 15, "已完成项目": 9, "暂停项目": 0, "项目完成率": 37.5 },
+            { "分支简称": "分支2", "职位数": 25, "新增简历数": 244, "简历推荐数": 244, "面试中总数": 24, "入职数": 6, "招聘账号数": 2225, "简历推荐率": 100.0, "面试转化率": 9.84, "入职转化率": 25.0, "进行中项目": 10, "已完成项目": 8, "暂停项目": 0, "项目完成率": 44.4 },
+            { "分支简称": "分支3", "职位数": 12, "新增简历数": 46, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 444, "简历推荐率": 65.22, "面试转化率": 16.67, "入职转化率": 20.0, "进行中项目": 8, "已完成项目": 7, "暂停项目": 0, "项目完成率": 46.7 },
+            { "分支简称": "分支4", "职位数": 25, "新增简历数": 278, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 5, "简历推荐率": 57.55, "面试转化率": 43.75, "入职转化率": 22.86, "进行中项目": 12, "已完成项目": 9, "暂停项目": 0, "项目完成率": 42.9 },
+            { "分支简称": "分支5", "职位数": 7, "新增简历数": 4, "简历推荐数": 4, "面试中总数": 4, "入职数": 4, "招聘账号数": 25, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0, "进行中项目": 7, "已完成项目": 5, "暂停项目": 0, "项目完成率": 41.7 },
+            { "分支简称": "分支6", "职位数": 21, "新增简历数": 123123, "简历推荐数": 12311, "面试中总数": 1231, "入职数": 245, "招聘账号数": 5552, "简历推荐率": 10.0, "面试转化率": 10.0, "入职转化率": 19.9, "进行中项目": 6, "已完成项目": 4, "暂停项目": 2, "项目完成率": 33.3 },
+            { "分支简称": "分支7", "职位数": 26, "新增简历数": 25, "简历推荐数": 1223, "面试中总数": 139, "入职数": 13, "招聘账号数": 25, "简历推荐率": 4892.0, "面试转化率": 11.37, "入职转化率": 9.35, "进行中项目": 5, "已完成项目": 3, "暂停项目": 1, "项目完成率": 33.3 },
+            { "分支简称": "分支8", "职位数": 9, "新增简历数": 2525, "简历推荐数": 254, "面试中总数": 24, "入职数": 6, "招聘账号数": 25, "简历推荐率": 10.06, "面试转化率": 9.45, "入职转化率": 25.0, "进行中项目": 4, "已完成项目": 3, "暂停项目": 0, "项目完成率": 42.9 },
+            { "分支简称": "分支9", "职位数": 555, "新增简历数": 402, "简历推荐数": 30, "面试中总数": 5, "入职数": 1, "招聘账号数": 252, "简历推荐率": 7.46, "面试转化率": 16.67, "入职转化率": 20.0, "进行中项目": 3, "已完成项目": 2, "暂停项目": 0, "项目完成率": 40.0 },
+            { "分支简称": "分支10", "职位数": 38, "新增简历数": 629, "简历推荐数": 160, "面试中总数": 70, "入职数": 16, "招聘账号数": 7, "简历推荐率": 25.44, "面试转化率": 43.75, "入职转化率": 22.86, "进行中项目": 4, "已完成项目": 3, "暂停项目": 0, "项目完成率": 42.9 },
+            { "分支简称": "分支11", "职位数": 21, "新增简历数": 21, "简历推荐数": 21, "面试中总数": 21, "入职数": 21, "招聘账号数": 21, "简历推荐率": 100.0, "面试转化率": 100.0, "入职转化率": 100.0, "进行中项目": 8, "已完成项目": 11, "暂停项目": 0, "项目完成率": 57.9 },
+            { "分支简称": "分支12", "职位数": 33, "新增简历数": 333, "简历推荐数": 33, "面试中总数": 3, "入职数": 3, "招聘账号数": 33, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 12, "已完成项目": 15, "暂停项目": 1, "项目完成率": 53.6 },
+            { "分支简称": "分支13", "职位数": 44, "新增简历数": 444, "简历推荐数": 44, "面试中总数": 4, "入职数": 4, "招聘账号数": 44, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 14, "已完成项目": 18, "暂停项目": 0, "项目完成率": 56.3 },
+            { "分支简称": "分支14", "职位数": 55, "新增简历数": 555, "简历推荐数": 55, "面试中总数": 5, "入职数": 5, "招聘账号数": 55, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 16, "已完成项目": 20, "暂停项目": 2, "项目完成率": 52.6 },
+            { "分支简称": "分支15", "职位数": 66, "新增简历数": 666, "简历推荐数": 66, "面试中总数": 6, "入职数": 6, "招聘账号数": 66, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 18, "已完成项目": 22, "暂停项目": 1, "项目完成率": 53.7 },
+            { "分支简称": "分支16", "职位数": 77, "新增简历数": 777, "简历推荐数": 77, "面试中总数": 7, "入职数": 7, "招聘账号数": 77, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 20, "已完成项目": 25, "暂停项目": 0, "项目完成率": 55.6 },
+            { "分支简称": "分支17", "职位数": 88, "新增简历数": 888, "简历推荐数": 88, "面试中总数": 8, "入职数": 8, "招聘账号数": 88, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 22, "已完成项目": 28, "暂停项目": 2, "项目完成率": 53.8 },
+            { "分支简称": "分支18", "职位数": 99, "新增简历数": 999, "简历推荐数": 99, "面试中总数": 9, "入职数": 9, "招聘账号数": 99, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 24, "已完成项目": 30, "暂停项目": 1, "项目完成率": 54.5 },
+            { "分支简称": "分支19", "职位数": 101, "新增简历数": 1010, "简历推荐数": 101, "面试中总数": 10, "入职数": 10, "招聘账号数": 101, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 26, "已完成项目": 32, "暂停项目": 3, "项目完成率": 52.5 },
+            { "分支简称": "分支20", "职位数": 111, "新增简历数": 1111, "简历推荐数": 111, "面试中总数": 11, "入职数": 11, "招聘账号数": 111, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 28, "已完成项目": 35, "暂停项目": 2, "项目完成率": 53.8 },
+            { "分支简称": "分支21", "职位数": 121, "新增简历数": 1212, "简历推荐数": 121, "面试中总数": 12, "入职数": 12, "招聘账号数": 121, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 30, "已完成项目": 38, "暂停项目": 1, "项目完成率": 55.1 },
+            { "分支简称": "分支22", "职位数": 131, "新增简历数": 1313, "简历推荐数": 131, "面试中总数": 13, "入职数": 13, "招聘账号数": 131, "简历推荐率": 9.91, "面试转化率": 9.09, "入职转化率": 100.0, "进行中项目": 32, "已完成项目": 40, "暂停项目": 4, "项目完成率": 52.6 }
         ];
 
         const monthly_data = [
@@ -111,7 +111,7 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <i class="fas fa-chart-line text-blue-600 text-2xl mr-3"></i>
-                    <h1 class="text-xl font-semibold text-gray-900">招聘数据仪表盘</h1>
+                    <h1 class="text-xl font-semibold text-gray-900">招聘项目管理系统 - 数据归集中心</h1>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
@@ -251,6 +251,223 @@
                     </span>
                     <span class="text-gray-500 ml-2">vs 上月</span>
                 </div>
+
+            </div><div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">赏金猎人数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">待发放赏金</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">已发放赏金</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">赏金职位数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">成功悬赏职位</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">成功悬赏简历</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">赏金推广次数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">系统分支数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">分支账号数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">网站访问量</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">C端用户数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">简历总数</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1 kpi-value" data-kpi="入职数">0</p>
+                    </div>
+                    <div class="bg-teal-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus text-teal-600"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 18.4%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs 上月</span>
+                </div>
             </div>
         </div>
 
@@ -286,10 +503,20 @@
 
         <!-- 分支数据区域 -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <!-- 分支招聘数据 -->
+            <!-- 分支招聘项目 -->
             <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-lg font-semibold text-gray-900">分支招聘转化分析</h2>
+                    <h2 class="text-lg font-semibold text-gray-900">分支招聘项目</h2>
+                    <div class="flex space-x-2">
+                        <button id="project-progress" class="text-sm px-3 py-1 bg-blue-600 text-white rounded-md">项目进度</button>
+                        <button id="project-metrics" class="text-sm px-3 py-1 bg-gray-200 text-gray-700 rounded-md">招聘指标</button>
+                    </div>
+                </div>
+                <div class="h-80">
+                    <canvas id="branch-chart"></canvas>
+                </div>
+                <!-- 切换模式时的指标选择器 -->
+                <div id="metrics-selector" class="mt-4 hidden">
                     <div class="relative">
                         <select id="branch-metric"
                             class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 appearance-none pr-8">
@@ -305,22 +532,74 @@
                         </div>
                     </div>
                 </div>
-                <div class="h-80">
-                    <canvas id="branch-chart"></canvas>
-                </div>
             </div>
 
-            <!-- 职位热度 -->
+            <!-- 招聘效率 -->
             <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-lg font-semibold text-gray-900">热门职位需求</h2>
+                    <h2 class="text-lg font-semibold text-gray-900">招聘效率</h2>
                     <div class="text-sm text-gray-500">
-                        <i class="fas fa-fire text-red-500 mr-1"></i> 热度指数
+                        <i class="fas fa-chart-pie text-blue-500 mr-1"></i> 各分支完成率分布
                     </div>
                 </div>
                 <div class="h-80">
-                    <canvas id="position-chart"></canvas>
+                    <canvas id="efficiency-chart"></canvas>
                 </div>
+                <!-- 效率统计 -->
+                <div class="mt-6 border-t border-gray-100 pt-6">
+                    <h4 class="text-sm font-medium mb-4">效率等级分布</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-500">优秀 (≥60%)</span>
+                                <span class="font-medium" id="excellent-count">0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="excellent-bar" class="bg-green-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-500">良好 (50-60%)</span>
+                                <span class="font-medium" id="good-count">0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="good-bar" class="bg-blue-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-500">一般 (40-50%)</span>
+                                <span class="font-medium" id="average-count">0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="average-bar" class="bg-yellow-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-500">待提升 (<40%)</span>
+                                <span class="font-medium" id="poor-count">0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="poor-bar" class="bg-red-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 职位热度图表 -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-lg font-semibold text-gray-900">热门职位需求</h2>
+                <div class="text-sm text-gray-500">
+                    <i class="fas fa-fire text-red-500 mr-1"></i> 热度指数
+                </div>
+            </div>
+            <div class="h-80">
+                <canvas id="position-chart"></canvas>
             </div>
         </div>
 
@@ -387,7 +666,8 @@
             // 初始化图表
             initTrendChart(6);
             initDeptChart();
-            initBranchChart('职位数');
+            initBranchChart('项目进度');
+            initEfficiencyChart();
             initPositionChart();
 
             // 初始化表格
@@ -412,6 +692,26 @@
                 document.getElementById('trend-6m').classList.remove('bg-blue-600', 'text-white');
                 document.getElementById('trend-6m').classList.add('bg-gray-200', 'text-gray-700');
                 initTrendChart(12);
+            });
+
+            // 分支图表模式切换
+            document.getElementById('project-progress').addEventListener('click', function () {
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                this.classList.add('bg-blue-600', 'text-white');
+                document.getElementById('project-metrics').classList.remove('bg-blue-600', 'text-white');
+                document.getElementById('project-metrics').classList.add('bg-gray-200', 'text-gray-700');
+                document.getElementById('metrics-selector').classList.add('hidden');
+                initBranchChart('项目进度');
+            });
+
+            document.getElementById('project-metrics').addEventListener('click', function () {
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                this.classList.add('bg-blue-600', 'text-white');
+                document.getElementById('project-progress').classList.remove('bg-blue-600', 'text-white');
+                document.getElementById('project-progress').classList.add('bg-gray-200', 'text-gray-700');
+                document.getElementById('metrics-selector').classList.remove('hidden');
+                const selectedMetric = document.getElementById('branch-metric').value;
+                initBranchChart(selectedMetric);
             });
 
             document.getElementById('branch-metric').addEventListener('change', function (e) {
@@ -559,16 +859,141 @@
                 window.branchChart.destroy();
             }
 
-            window.branchChart = new Chart(ctx, {
-                type: 'bar',
+            if (metric === '项目进度') {
+                // 堆叠柱状图模式
+                window.branchChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.分支简称),
+                        datasets: [
+                            {
+                                label: '进行中项目',
+                                data: data.map(d => d.进行中项目),
+                                backgroundColor: 'rgb(59, 130, 246)',
+                                borderColor: 'rgb(59, 130, 246)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: '已完成项目',
+                                data: data.map(d => d.已完成项目),
+                                backgroundColor: 'rgb(34, 197, 94)',
+                                borderColor: 'rgb(34, 197, 94)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: '暂停项目',
+                                data: data.map(d => d.暂停项目),
+                                backgroundColor: 'rgb(251, 191, 36)',
+                                borderColor: 'rgb(251, 191, 36)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true,
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                stacked: true,
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                // 普通柱状图模式
+                window.branchChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.分支简称),
+                        datasets: [{
+                            label: metric,
+                            data: data.map(d => d[metric]),
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // 初始化招聘效率图表
+        function initEfficiencyChart() {
+            const ctx = document.getElementById('efficiency-chart').getContext('2d');
+            
+            // 根据项目完成率进行分类统计
+            const efficiencyData = {
+                excellent: 0,  // ≥60%
+                good: 0,       // 50-60%
+                average: 0,    // 40-50%
+                poor: 0        // <40%
+            };
+
+            branch_data.forEach(branch => {
+                const rate = branch.项目完成率;
+                if (rate >= 60) efficiencyData.excellent++;
+                else if (rate >= 50) efficiencyData.good++;
+                else if (rate >= 40) efficiencyData.average++;
+                else efficiencyData.poor++;
+            });
+
+            const total = branch_data.length;
+
+            if (window.efficiencyChart) {
+                window.efficiencyChart.destroy();
+            }
+
+            window.efficiencyChart = new Chart(ctx, {
+                type: 'doughnut',
                 data: {
-                    labels: data.map(d => d.分支简称),
+                    labels: ['优秀 (≥60%)', '良好 (50-60%)', '一般 (40-50%)', '待提升 (<40%)'],
                     datasets: [{
-                        label: metric,
-                        data: data.map(d => d[metric]),
-                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                        borderColor: 'rgb(59, 130, 246)',
-                        borderWidth: 1
+                        data: [efficiencyData.excellent, efficiencyData.good, efficiencyData.average, efficiencyData.poor],
+                        backgroundColor: [
+                            'rgb(34, 197, 94)',   // 绿色
+                            'rgb(59, 130, 246)',  // 蓝色  
+                            'rgb(251, 191, 36)',  // 黄色
+                            'rgb(239, 68, 68)'    // 红色
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
                     }]
                 },
                 options: {
@@ -576,24 +1001,27 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            display: false
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 15
+                            }
                         }
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    }
+                    cutout: '60%'
                 }
             });
+
+            // 更新统计条
+            document.getElementById('excellent-count').textContent = efficiencyData.excellent;
+            document.getElementById('good-count').textContent = efficiencyData.good;
+            document.getElementById('average-count').textContent = efficiencyData.average;
+            document.getElementById('poor-count').textContent = efficiencyData.poor;
+
+            document.getElementById('excellent-bar').style.width = `${(efficiencyData.excellent / total) * 100}%`;
+            document.getElementById('good-bar').style.width = `${(efficiencyData.good / total) * 100}%`;
+            document.getElementById('average-bar').style.width = `${(efficiencyData.average / total) * 100}%`;
+            document.getElementById('poor-bar').style.width = `${(efficiencyData.poor / total) * 100}%`;
         }
 
         // 初始化职位热度图表
